@@ -1,4 +1,4 @@
-package com.smlnskgmail.jaman.githubclient.support
+package com.smlnskgmail.jaman.githubclient.components
 
 import android.os.Bundle
 import android.view.LayoutInflater
