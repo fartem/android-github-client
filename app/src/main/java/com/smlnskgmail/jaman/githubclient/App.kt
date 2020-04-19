@@ -1,7 +1,7 @@
 package com.smlnskgmail.jaman.githubclient
 
 import android.app.Application
-import com.smlnskgmail.jaman.githubclient.model.github.api.GitHubProfilesApi
+import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfilesApi
 import com.smlnskgmail.jaman.githubclient.model.github.impl.github.GitHubApi
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind

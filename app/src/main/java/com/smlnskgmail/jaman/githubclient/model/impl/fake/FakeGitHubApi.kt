@@ -1,8 +1,8 @@
-package com.smlnskgmail.jaman.githubclient.model.github.impl.fake
+package com.smlnskgmail.jaman.githubclient.model.impl.fake
 
-import com.smlnskgmail.jaman.githubclient.model.github.api.GitHubProfile
-import com.smlnskgmail.jaman.githubclient.model.github.api.GitHubProfilesApi
-import com.smlnskgmail.jaman.githubclient.model.github.api.GitHubRepository
+import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfile
+import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfilesApi
+import com.smlnskgmail.jaman.githubclient.model.api.GitHubRepository
 
 class FakeGitHubApi : GitHubProfilesApi {
 

@@ -1,4 +1,4 @@
-package com.smlnskgmail.jaman.githubclient.model.github.api
+package com.smlnskgmail.jaman.githubclient.model.api
 
 data class GitHubRepository(
     val name: String,

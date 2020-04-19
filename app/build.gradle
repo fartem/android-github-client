@@ -14,6 +14,8 @@ android {
         versionName '1.0.0'
 
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+
+        buildConfigField 'String', 'API_IMPL', "\"\""
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -21,6 +23,20 @@ android {
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    flavorDimensions 'build'
+    productFlavors {
+        githubImpl {
+            flavorDimensions 'build'
+
+            buildConfigField 'String', 'API_IMPL', "\"GITHUB\""
+        }
+        fakeImpl {
+            flavorDimensions 'build'
+
+            buildConfigField 'String', 'API_IMPL', "\"FAKE\""
+        }
     }
 }
 
@@ -33,6 +49,11 @@ dependencies {
 
     // Kodein
     implementation 'org.kodein.di:kodein-di-generic-jvm:6.5.5'
+
+    // Retrofit
+    // noinspection GradleDependency
+    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
 
     // Unit tests
     testImplementation 'junit:junit:4.13'

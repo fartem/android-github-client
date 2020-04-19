@@ -1,4 +1,4 @@
-package com.smlnskgmail.jaman.githubclient.model.github.api
+package com.smlnskgmail.jaman.githubclient.model.api
 
 interface GitHubProfilesApi {
 
