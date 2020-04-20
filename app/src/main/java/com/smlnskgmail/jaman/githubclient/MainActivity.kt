@@ -2,12 +2,12 @@ package com.smlnskgmail.jaman.githubclient
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.smlnskgmail.jaman.githubclient.components.BaseActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    override fun layoutResId(): Int {
+        return R.layout.activity_main
     }
 
 }
