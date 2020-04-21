@@ -1,20 +1,32 @@
 package com.smlnskgmail.jaman.githubclient.model.impl.fake
 
+import android.content.Context
+import android.graphics.BitmapFactory
+import com.smlnskgmail.jaman.githubclient.R
 import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfile
 import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfilesApi
 import com.smlnskgmail.jaman.githubclient.model.api.GitHubRepository
 
-class FakeGitHubApi : GitHubProfilesApi {
+class FakeGitHubApi(
+    private val context: Context
+) : GitHubProfilesApi {
 
-    private val profiles = listOf(
-        GitHubProfile(
-            "Artem Fomchenkov",
-            "fartem",
-            5,
-            0,
-            null
+    private val profiles = mutableListOf<GitHubProfile>()
+
+    init {
+        profiles.add(
+            GitHubProfile(
+                "Artem Fomchenkov",
+                "fartem",
+                5,
+                0,
+                BitmapFactory.decodeResource(
+                    context.resources,
+                    R.drawable.ic_person
+                )
+            )
         )
-    )
+    }
 
     private val repositories = listOf(
         GitHubRepository(
@@ -59,13 +71,13 @@ class FakeGitHubApi : GitHubProfilesApi {
     override fun profilesPortion(
         offset: Int
     ): List<GitHubProfile> {
-        if (offset > profiles.size) {
-            hasUsers = false
-        }
-        return if (hasUsers) {
-            profiles
-        } else {
-            emptyList()
+        return when {
+            offset > profiles.size -> {
+                hasUsers = false
+                profiles
+            }
+            hasUsers -> profiles
+            else -> emptyList()
         }
     }
 
