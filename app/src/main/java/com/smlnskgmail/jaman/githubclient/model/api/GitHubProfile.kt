@@ -7,5 +7,5 @@ data class GitHubProfile(
     val name: String,
     val countOfPublicRepositories: Int,
     val countOfPublicGists: Int,
-    val photo: Bitmap
+    val photo: Bitmap?
 )
