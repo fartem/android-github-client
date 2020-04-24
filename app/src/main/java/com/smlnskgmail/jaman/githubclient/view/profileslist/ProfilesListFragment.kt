@@ -40,6 +40,8 @@ class ProfilesListFragment : BaseFragment(), ProfilesListView, KodeinAware {
             gitHubProfilesApi,
             this
         )
+
+        profiles_list_refresh.isEnabled = false
     }
 
     override fun showProfilesList(
@@ -48,6 +50,16 @@ class ProfilesListFragment : BaseFragment(), ProfilesListView, KodeinAware {
         this.profiles.addAll(profiles)
         profiles_list.layoutManager = LinearLayoutManager(context)
         profiles_list.adapter = ProfilesListAdapter(profiles)
+
+        // TODO: refactor visibility set
+        profiles_list_progress_bar_top.visibility = View.GONE
+        profiles_list_progress_bar_center.visibility = View.GONE
+        profiles_list_refresh.isRefreshing = false
+        profiles_list_refresh.isEnabled = true
+        profiles_list_refresh.setOnRefreshListener {
+            profiles_list_progress_bar_top.visibility = View.VISIBLE
+            profilesListPresenter.reloadProfiles()
+        }
     }
 
     override fun addToProfilesList(
