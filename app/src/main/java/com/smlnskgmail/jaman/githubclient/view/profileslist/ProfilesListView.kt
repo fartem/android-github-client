@@ -11,4 +11,6 @@ interface ProfilesListView {
         profiles: List<GitHubProfile>
     )
 
+    fun showLoadError()
+
 }

@@ -1,8 +1,6 @@
 package com.smlnskgmail.jaman.githubclient.model.impl.fake
 
 import android.content.Context
-import android.graphics.BitmapFactory
-import com.smlnskgmail.jaman.githubclient.R
 import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfile
 import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfilesApi
 import com.smlnskgmail.jaman.githubclient.model.api.GitHubRepository
@@ -16,14 +14,9 @@ class FakeGitHubApi(
     init {
         profiles.add(
             GitHubProfile(
-                "Artem Fomchenkov",
+                Integer.MAX_VALUE.toString(),
                 "fartem",
-                5,
-                0,
-                BitmapFactory.decodeResource(
-                    context.resources,
-                    R.drawable.ic_person
-                )
+                null
             )
         )
     }
@@ -69,25 +62,32 @@ class FakeGitHubApi(
     private var hasUsers = true
 
     override fun profilesPortion(
-        offset: Int
-    ): List<GitHubProfile> {
-        return when {
-            offset > profiles.size -> {
-                hasUsers = false
-                profiles
+        page: Int,
+        profilesLoadCallback: GitHubProfilesApi.ProfilesLoadCallback
+    ) {
+        profilesLoadCallback.loadSuccess(
+            when {
+                page > profiles.size -> {
+                    hasUsers = false
+                    profiles
+                }
+                hasUsers -> profiles
+                else -> emptyList()
             }
-            hasUsers -> profiles
-            else -> emptyList()
-        }
+        )
     }
 
     override fun repositoriesFor(
-        profile: GitHubProfile
-    ): List<GitHubRepository> {
-        if (profile.name == "fartem") {
-            return repositories
-        }
-        return emptyList()
+        profile: GitHubProfile,
+        repositoriesLoadCallback: GitHubProfilesApi.RepositoriesLoadCallback
+    ) {
+        repositoriesLoadCallback.loadSuccess(
+            if (profile.login == "fartem") {
+                repositories
+            } else {
+                emptyList()
+            }
+        )
     }
 
 }

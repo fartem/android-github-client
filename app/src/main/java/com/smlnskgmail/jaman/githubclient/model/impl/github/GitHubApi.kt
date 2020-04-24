@@ -3,12 +3,14 @@ package com.smlnskgmail.jaman.githubclient.model.impl.github
 import com.google.gson.GsonBuilder
 import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfile
 import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfilesApi
-import com.smlnskgmail.jaman.githubclient.model.api.GitHubRepository
 import com.smlnskgmail.jaman.githubclient.model.impl.github.deserializers.GitHubProfilesDeserializer
 import com.smlnskgmail.jaman.githubclient.model.impl.github.deserializers.GitHubRepositoriesDeserializer
 import com.smlnskgmail.jaman.githubclient.model.impl.github.retrofit.GitHubApiService
 import com.smlnskgmail.jaman.githubclient.model.impl.github.retrofit.responcses.GitHubProfilesResponse
 import com.smlnskgmail.jaman.githubclient.model.impl.github.retrofit.responcses.GitHubRepositoriesResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -45,15 +47,39 @@ class GitHubApi : GitHubProfilesApi {
     }
 
     override fun profilesPortion(
-        offset: Int
-    ): List<GitHubProfile> {
-        TODO("Not yet implemented")
+        page: Int,
+        profilesLoadCallback: GitHubProfilesApi.ProfilesLoadCallback
+    ) {
+        gitHubApiService.profilesPortion(
+            page.times(30).toString()
+        ).enqueue(object : Callback<GitHubProfilesResponse> {
+            override fun onFailure(
+                call: Call<GitHubProfilesResponse>,
+                t: Throwable
+            ) {
+                profilesLoadCallback.loadSuccess(
+                    emptyList()
+                )
+            }
+
+            override fun onResponse(
+                call: Call<GitHubProfilesResponse>,
+                response: Response<GitHubProfilesResponse>
+            ) {
+                profilesLoadCallback.loadSuccess(
+                    response.body()!!.profiles
+                )
+            }
+        })
     }
 
     override fun repositoriesFor(
-        profile: GitHubProfile
-    ): List<GitHubRepository> {
-        TODO("Not yet implemented")
+        profile: GitHubProfile,
+        repositoriesLoadCallback: GitHubProfilesApi.RepositoriesLoadCallback
+    ) {
+        repositoriesLoadCallback.loadSuccess(
+            emptyList()
+        )
     }
 
 }

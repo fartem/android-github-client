@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.smlnskgmail.jaman.githubclient.R
 import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfile
 import kotlinx.android.synthetic.main.item_profile.view.*
@@ -41,8 +42,13 @@ class ProfilesListAdapter(
     ) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(gitHubProfile: GitHubProfile) {
-            itemView.profile_full_name.text = gitHubProfile.fullName
-            itemView.profile_name.text = gitHubProfile.name
+            itemView.profile_login.text = gitHubProfile.login
+            itemView.profile_id.text = gitHubProfile.id
+            if (gitHubProfile.photoUrl != null) {
+                Glide.with(itemView.context!!)
+                    .load(gitHubProfile.photoUrl)
+                    .into(itemView.profile_avatar)
+            }
         }
 
     }

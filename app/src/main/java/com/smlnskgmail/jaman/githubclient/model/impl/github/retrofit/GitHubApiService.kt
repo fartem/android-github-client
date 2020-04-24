@@ -4,18 +4,18 @@ import com.smlnskgmail.jaman.githubclient.model.impl.github.retrofit.responcses.
 import com.smlnskgmail.jaman.githubclient.model.impl.github.retrofit.responcses.GitHubRepositoriesResponse
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface GitHubApiService {
 
-    @GET("/users?since={offset}")
+    @GET("/users")
     fun profilesPortion(
-        @Path("offset") offset: Int
+        @Query("since") offset: String
     ): Call<GitHubProfilesResponse>
 
     @GET("/users/{user}/repos")
     fun repositories(
-        @Path("user") profileId: String
+        @Query("user") profileId: String
     ): Call<GitHubRepositoriesResponse>
 
 }

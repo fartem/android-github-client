@@ -10,4 +10,6 @@ interface ProfilesListPresenter {
         profilesListView: ProfilesListView
     )
 
+    fun loadMoreProfiles()
+
 }

@@ -61,6 +61,10 @@ class ProfilesListFragment : BaseFragment(), ProfilesListView, KodeinAware {
         )
     }
 
+    override fun showLoadError() {
+
+    }
+
     override fun layoutResId(): Int {
         return R.layout.fragment_profiles_list
     }
