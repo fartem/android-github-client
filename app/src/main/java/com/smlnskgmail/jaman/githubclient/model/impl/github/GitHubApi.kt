@@ -32,6 +32,7 @@ class GitHubApi : GitHubProfilesApi {
 
     init {
         retrofit = Retrofit.Builder()
+            .baseUrl("https://api.github.com")
             .addConverterFactory(
                 GsonConverterFactory.create(
                     gson
