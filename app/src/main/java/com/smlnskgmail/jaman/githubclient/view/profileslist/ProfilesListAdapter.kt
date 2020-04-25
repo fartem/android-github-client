@@ -1,11 +1,13 @@
 package com.smlnskgmail.jaman.githubclient.view.profileslist
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.smlnskgmail.jaman.githubclient.R
 import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubShortProfile
 import kotlinx.android.synthetic.main.item_profile.view.*
@@ -122,11 +124,17 @@ class ProfilesListAdapter(
         itemView: View
     ) : RecyclerView.ViewHolder(itemView) {
 
+        @SuppressLint("CheckResult")
         open fun bind(gitHubShortProfile: GitHubShortProfile) {
             itemView.profile_login.text = gitHubShortProfile.login
             itemView.profile_type.text = gitHubShortProfile.type
             if (gitHubShortProfile.photoUrl != null) {
+                val requestOptions = RequestOptions()
+                requestOptions.override(100, 100)
+
                 Glide.with(itemView.context!!)
+                    .asBitmap()
+                    .apply(requestOptions)
                     .load(gitHubShortProfile.photoUrl)
                     .diskCacheStrategy(DiskCacheStrategy.DATA)
                     .into(itemView.profile_avatar)

@@ -17,12 +17,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class GitHubApi : GitHubProfilesApi {
 
-    companion object {
-
-        private const val itemsInPage = 30
-
-    }
-
     private var retrofit: Retrofit
 
     private var gitHubApiService: GitHubApiService
@@ -80,12 +74,16 @@ class GitHubApi : GitHubProfilesApi {
 
             override fun onResponse(
                 call: Call<GitHubShortProfilesResponse>,
-                responseShort: Response<GitHubShortProfilesResponse>
+                response: Response<GitHubShortProfilesResponse>
             ) {
-                lastId = responseShort.body()!!.shortProfiles.last().id
-                profilesLoadCallback.loadSuccess(
-                    responseShort.body()!!.shortProfiles
-                )
+                if (response.body() != null) {
+                    lastId = response.body()!!.shortProfiles.last().id
+                    profilesLoadCallback.loadSuccess(
+                        response.body()!!.shortProfiles
+                    )
+                } else {
+                    profilesLoadCallback.loadError()
+                }
             }
         })
     }
@@ -108,9 +106,13 @@ class GitHubApi : GitHubProfilesApi {
                 call: Call<GitHubExpandedProfileResponse>,
                 response: Response<GitHubExpandedProfileResponse>
             ) {
-                expandedProfileLoadCallback.loadSuccess(
-                    response.body()!!.expandedProfile
-                )
+                if (response.body() != null) {
+                    expandedProfileLoadCallback.loadSuccess(
+                        response.body()!!.expandedProfile
+                    )
+                } else {
+                    expandedProfileLoadCallback.loadError()
+                }
             }
         })
     }
@@ -122,7 +124,7 @@ class GitHubApi : GitHubProfilesApi {
     ) {
         gitHubApiService.repositories(
             login,
-            page.times(itemsInPage)
+            page
         ).enqueue(object : Callback<GitHubRepositoriesResponse> {
             override fun onFailure(
                 call: Call<GitHubRepositoriesResponse>,
@@ -135,9 +137,13 @@ class GitHubApi : GitHubProfilesApi {
                 call: Call<GitHubRepositoriesResponse>,
                 response: Response<GitHubRepositoriesResponse>
             ) {
-                repositoriesLoadCallback.loadSuccess(
-                    response.body()!!.repositories
-                )
+                if (response.body() != null) {
+                    repositoriesLoadCallback.loadSuccess(
+                        response.body()!!.repositories
+                    )
+                } else {
+                    repositoriesLoadCallback.loadError()
+                }
             }
         })
     }
