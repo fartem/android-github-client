@@ -43,6 +43,8 @@ class GitHubApi : GitHubProfilesApi {
         .setLenient()
         .create()
 
+    private var lastId = 0
+
     init {
         retrofit = Retrofit.Builder()
             .baseUrl("https://api.github.com")
@@ -61,8 +63,11 @@ class GitHubApi : GitHubProfilesApi {
         page: Int,
         profilesLoadCallback: GitHubProfilesApi.ProfilesLoadCallback
     ) {
+        if (page == 0) {
+            lastId = 0
+        }
         gitHubApiService.profilesPortion(
-            page.times(itemsInPage)
+            lastId
         ).enqueue(object : Callback<GitHubShortProfilesResponse> {
             override fun onFailure(
                 call: Call<GitHubShortProfilesResponse>,
@@ -77,6 +82,7 @@ class GitHubApi : GitHubProfilesApi {
                 call: Call<GitHubShortProfilesResponse>,
                 responseShort: Response<GitHubShortProfilesResponse>
             ) {
+                lastId = responseShort.body()!!.shortProfiles.last().id
                 profilesLoadCallback.loadSuccess(
                     responseShort.body()!!.shortProfiles
                 )

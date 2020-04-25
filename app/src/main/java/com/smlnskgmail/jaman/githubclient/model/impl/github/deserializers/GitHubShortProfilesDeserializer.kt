@@ -17,6 +17,7 @@ class GitHubShortProfilesDeserializer : JsonDeserializer<GitHubShortProfilesResp
             it as JsonObject
             profiles.add(
                 GitHubShortProfile(
+                    it.get("id").asInt,
                     it.get("login").asString,
                     it.get("type").asString,
                     it.get("avatar_url").asString

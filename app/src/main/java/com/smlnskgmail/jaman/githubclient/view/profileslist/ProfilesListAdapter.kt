@@ -48,6 +48,7 @@ class ProfilesListAdapter(
         loaderIsVisible = true
         shortProfiles.add(
             GitHubShortProfile(
+                -1,
                 "",
                 "",
                 null

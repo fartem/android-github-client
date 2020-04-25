@@ -12,6 +12,7 @@ class FakeGitHubApi : GitHubProfilesApi {
     init {
         profiles.add(
             GitHubShortProfile(
+                Integer.MAX_VALUE,
                 "fartem",
                 "User",
                 null
