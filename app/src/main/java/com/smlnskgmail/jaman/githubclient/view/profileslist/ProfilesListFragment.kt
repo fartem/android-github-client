@@ -6,8 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.smlnskgmail.jaman.githubclient.App
 import com.smlnskgmail.jaman.githubclient.R
 import com.smlnskgmail.jaman.githubclient.components.BaseFragment
-import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubShortProfile
+import com.smlnskgmail.jaman.githubclient.components.RecyclerViewPagination
 import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfilesApi
+import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubShortProfile
 import com.smlnskgmail.jaman.githubclient.presenter.profileslist.ProfilesListPresenter
 import com.smlnskgmail.jaman.githubclient.presenter.profileslist.ProfilesListPresenterImpl
 import kotlinx.android.synthetic.main.fragment_profiles_list.*
@@ -22,8 +23,6 @@ class ProfilesListFragment : BaseFragment(), ProfilesListView, KodeinAware {
     private val gitHubProfilesApi: GitHubProfilesApi by instance<GitHubProfilesApi>()
 
     private lateinit var profilesListPresenter: ProfilesListPresenter
-
-    private val profiles = mutableListOf<GitHubShortProfile>()
 
     override fun onViewCreated(
         view: View,
@@ -47,9 +46,25 @@ class ProfilesListFragment : BaseFragment(), ProfilesListView, KodeinAware {
     override fun showProfilesList(
         shortProfiles: List<GitHubShortProfile>
     ) {
-        this.profiles.addAll(shortProfiles)
-        profiles_list.layoutManager = LinearLayoutManager(context)
-        profiles_list.adapter = ProfilesListAdapter(shortProfiles)
+        val adapter = ProfilesListAdapter(shortProfiles)
+
+        val layoutManager = LinearLayoutManager(context)
+        profiles_list.layoutManager = layoutManager
+        profiles_list.addOnScrollListener(object : RecyclerViewPagination(layoutManager) {
+            override fun loadMoreItems() {
+                adapter.loadingStarted()
+                profilesListPresenter.loadMoreProfiles()
+            }
+
+            override fun isLastPage(): Boolean {
+                return profilesListPresenter.profilesLoading()
+            }
+
+            override fun isLoading(): Boolean {
+                return profilesListPresenter.isLastPage()
+            }
+        })
+        profiles_list.adapter = adapter
 
         // TODO: refactor visibility set
         profiles_list_progress_bar_top.visibility = View.GONE
@@ -65,12 +80,14 @@ class ProfilesListFragment : BaseFragment(), ProfilesListView, KodeinAware {
     override fun addToProfilesList(
         shortProfiles: List<GitHubShortProfile>
     ) {
-        this.profiles.addAll(shortProfiles)
-        profiles_list.adapter?.notifyItemInserted(
-            profiles_list.adapter?.itemCount?.minus(
-                shortProfiles.size
-            )!!
+        (profiles_list.adapter as ProfilesListAdapter).loadingEnded()
+        (profiles_list.adapter as ProfilesListAdapter).addProfiles(
+            shortProfiles
         )
+    }
+
+    override fun showLoadLatest() {
+
     }
 
     override fun showLoadError() {

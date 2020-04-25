@@ -17,6 +17,7 @@ interface GitHubProfilesApi {
 
     fun repositoriesFor(
         login: String,
+        page: Int,
         repositoriesLoadCallback: RepositoriesLoadCallback
     )
 

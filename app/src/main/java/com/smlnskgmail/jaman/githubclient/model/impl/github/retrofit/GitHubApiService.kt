@@ -1,21 +1,29 @@
 package com.smlnskgmail.jaman.githubclient.model.impl.github.retrofit
 
-import com.smlnskgmail.jaman.githubclient.model.impl.github.retrofit.responcses.GitHubProfilesResponse
+import com.smlnskgmail.jaman.githubclient.model.impl.github.retrofit.responcses.GitHubExpandedProfileResponse
 import com.smlnskgmail.jaman.githubclient.model.impl.github.retrofit.responcses.GitHubRepositoriesResponse
+import com.smlnskgmail.jaman.githubclient.model.impl.github.retrofit.responcses.GitHubShortProfilesResponse
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface GitHubApiService {
 
     @GET("/users")
     fun profilesPortion(
-        @Query("since") offset: String
-    ): Call<GitHubProfilesResponse>
+        @Query("since") offset: Int
+    ): Call<GitHubShortProfilesResponse>
+
+    @GET("/users/{user}")
+    fun profile(
+        @Path("user") profileId: String
+    ): Call<GitHubExpandedProfileResponse>
 
     @GET("/users/{user}/repos")
     fun repositories(
-        @Query("user") profileId: String
+        @Query("user") profileId: String,
+        @Query("per_page") offset: Int
     ): Call<GitHubRepositoriesResponse>
 
 }

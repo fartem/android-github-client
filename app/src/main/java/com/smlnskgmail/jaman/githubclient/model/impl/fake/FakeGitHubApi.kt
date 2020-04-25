@@ -1,10 +1,9 @@
 package com.smlnskgmail.jaman.githubclient.model.impl.fake
 
-import android.content.Context
-import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubShortProfile
 import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfilesApi
 import com.smlnskgmail.jaman.githubclient.model.api.GitHubRepository
 import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubExpandedProfile
+import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubShortProfile
 
 class FakeGitHubApi : GitHubProfilesApi {
 
@@ -59,6 +58,7 @@ class FakeGitHubApi : GitHubProfilesApi {
     )
 
     private var hasUsers = true
+    private var hasRepositories = true
 
     override fun profilesPortion(
         page: Int,
@@ -66,7 +66,7 @@ class FakeGitHubApi : GitHubProfilesApi {
     ) {
         profilesLoadCallback.loadSuccess(
             when {
-                page > profiles.size -> {
+                page * 30 > profiles.size -> {
                     hasUsers = false
                     profiles
                 }
@@ -98,15 +98,23 @@ class FakeGitHubApi : GitHubProfilesApi {
 
     override fun repositoriesFor(
         login: String,
+        page: Int,
         repositoriesLoadCallback: GitHubProfilesApi.RepositoriesLoadCallback
     ) {
-        repositoriesLoadCallback.loadSuccess(
-            if (login == "fartem") {
-                repositories
-            } else {
-                emptyList()
-            }
-        )
+        if (login == "fartem") {
+            repositoriesLoadCallback.loadSuccess(
+                when {
+                    page * 30 > repositories.size -> {
+                        hasRepositories = false
+                        repositories
+                    }
+                    hasRepositories -> repositories
+                    else -> emptyList()
+                }
+            )
+        } else {
+            repositoriesLoadCallback.loadError()
+        }
     }
 
 }

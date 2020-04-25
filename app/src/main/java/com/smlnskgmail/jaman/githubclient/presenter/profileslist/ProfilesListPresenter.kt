@@ -13,4 +13,7 @@ interface ProfilesListPresenter {
     fun reloadProfiles()
     fun loadMoreProfiles()
 
+    fun profilesLoading(): Boolean
+    fun isLastPage(): Boolean
+
 }

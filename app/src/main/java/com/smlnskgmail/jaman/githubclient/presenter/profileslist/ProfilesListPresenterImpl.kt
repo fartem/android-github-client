@@ -1,7 +1,7 @@
 package com.smlnskgmail.jaman.githubclient.presenter.profileslist
 
-import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubShortProfile
 import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfilesApi
+import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubShortProfile
 import com.smlnskgmail.jaman.githubclient.view.profileslist.ProfilesListView
 
 class ProfilesListPresenterImpl : ProfilesListPresenter {
@@ -10,6 +10,9 @@ class ProfilesListPresenterImpl : ProfilesListPresenter {
     private lateinit var profilesListView: ProfilesListView
 
     private var page: Int = 0
+
+    private var profilesLoading = false
+    private var isLastPage = false
 
     override fun init(
         gitHubProfilesApi: GitHubProfilesApi,
@@ -26,22 +29,39 @@ class ProfilesListPresenterImpl : ProfilesListPresenter {
     }
 
     override fun loadMoreProfiles() {
+        profilesLoading = true
         gitHubProfilesApi.profilesPortion(
             page++,
             object : GitHubProfilesApi.ProfilesLoadCallback {
                 override fun loadSuccess(
                     shortProfiles: List<GitHubShortProfile>
                 ) {
-                    profilesListView.showProfilesList(
-                        shortProfiles
-                    )
+                    if (page == 1) {
+                        profilesListView.showProfilesList(
+                            shortProfiles
+                        )
+                    } else {
+                        profilesListView.addToProfilesList(
+                            shortProfiles
+                        )
+                    }
+                    profilesLoading = false
                 }
 
                 override fun loadError() {
                     profilesListView.showLoadError()
+                    profilesLoading = false
                 }
             }
         )
+    }
+
+    override fun profilesLoading(): Boolean {
+        return profilesLoading
+    }
+
+    override fun isLastPage(): Boolean {
+        return isLastPage
     }
 
 }
