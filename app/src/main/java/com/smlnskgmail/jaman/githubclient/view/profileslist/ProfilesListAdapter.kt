@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.smlnskgmail.jaman.githubclient.R
-import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfile
+import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubShortProfile
 import kotlinx.android.synthetic.main.item_profile.view.*
 
 class ProfilesListAdapter(
-    private val profiles: List<GitHubProfile>
+    private val shortProfiles: List<GitHubShortProfile>
 ) : RecyclerView.Adapter<ProfilesListAdapter.ProfileHolder>() {
 
     override fun onCreateViewHolder(
@@ -30,23 +30,23 @@ class ProfilesListAdapter(
         holder: ProfileHolder,
         position: Int
     ) {
-        holder.bind(profiles[position])
+        holder.bind(shortProfiles[position])
     }
 
     override fun getItemCount(): Int {
-        return profiles.size
+        return shortProfiles.size
     }
 
     inner class ProfileHolder(
         itemView: View
     ) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(gitHubProfile: GitHubProfile) {
-            itemView.profile_login.text = gitHubProfile.login
-            itemView.profile_id.text = gitHubProfile.id
-            if (gitHubProfile.photoUrl != null) {
+        fun bind(gitHubShortProfile: GitHubShortProfile) {
+            itemView.profile_login.text = gitHubShortProfile.login
+            itemView.profile_type.text = gitHubShortProfile.type
+            if (gitHubShortProfile.photoUrl != null) {
                 Glide.with(itemView.context!!)
-                    .load(gitHubProfile.photoUrl)
+                    .load(gitHubShortProfile.photoUrl)
                     .into(itemView.profile_avatar)
             }
         }

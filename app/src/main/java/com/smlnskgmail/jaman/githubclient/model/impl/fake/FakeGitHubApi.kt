@@ -1,21 +1,20 @@
 package com.smlnskgmail.jaman.githubclient.model.impl.fake
 
 import android.content.Context
-import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfile
+import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubShortProfile
 import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfilesApi
 import com.smlnskgmail.jaman.githubclient.model.api.GitHubRepository
+import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubExpandedProfile
 
-class FakeGitHubApi(
-    private val context: Context
-) : GitHubProfilesApi {
+class FakeGitHubApi : GitHubProfilesApi {
 
-    private val profiles = mutableListOf<GitHubProfile>()
+    private val profiles = mutableListOf<GitHubShortProfile>()
 
     init {
         profiles.add(
-            GitHubProfile(
-                Integer.MAX_VALUE.toString(),
+            GitHubShortProfile(
                 "fartem",
+                "User",
                 null
             )
         )
@@ -77,12 +76,32 @@ class FakeGitHubApi(
         )
     }
 
+    override fun expandedProfileFor(
+        login: String,
+        expandedProfileLoadCallback: GitHubProfilesApi.ProfileLoadCallback
+    ) {
+        if (login == "fartem") {
+            expandedProfileLoadCallback.loadSuccess(
+                GitHubExpandedProfile(
+                    "fartem",
+                    "Artem Fomchenkov",
+                    "",
+                    "Russia, Smolensk",
+                    "jaman.smlnsk@gmail.com",
+                    null
+                )
+            )
+        } else {
+            expandedProfileLoadCallback.loadError()
+        }
+    }
+
     override fun repositoriesFor(
-        profile: GitHubProfile,
+        login: String,
         repositoriesLoadCallback: GitHubProfilesApi.RepositoriesLoadCallback
     ) {
         repositoriesLoadCallback.loadSuccess(
-            if (profile.login == "fartem") {
+            if (login == "fartem") {
                 repositories
             } else {
                 emptyList()

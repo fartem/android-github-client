@@ -1,7 +1,7 @@
 package com.smlnskgmail.jaman.githubclient.model.impl.github.deserializers
 
 import com.google.gson.*
-import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfile
+import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubShortProfile
 import com.smlnskgmail.jaman.githubclient.model.impl.github.retrofit.responcses.GitHubProfilesResponse
 import java.lang.reflect.Type
 
@@ -12,13 +12,13 @@ class GitHubProfilesDeserializer : JsonDeserializer<GitHubProfilesResponse> {
         typeOfT: Type?,
         jsonDeserializationContext: JsonDeserializationContext?
     ): GitHubProfilesResponse {
-        val profiles = mutableListOf<GitHubProfile>()
+        val profiles = mutableListOf<GitHubShortProfile>()
         (json as JsonArray).forEach {
             it as JsonObject
             profiles.add(
-                GitHubProfile(
-                    it.get("id").asString,
+                GitHubShortProfile(
                     it.get("login").asString,
+                    it.get("type").asString,
                     it.get("avatar_url").asString
                 )
             )

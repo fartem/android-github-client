@@ -18,9 +18,7 @@ class App : Application(), KodeinAware {
             if (BuildConfig.API_IMPL == "GITHUB") {
                 GitHubApi()
             } else {
-                FakeGitHubApi(
-                    this@App
-                )
+                FakeGitHubApi()
             }
         }
     }

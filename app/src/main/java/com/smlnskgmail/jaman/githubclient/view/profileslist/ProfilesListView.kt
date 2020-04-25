@@ -1,14 +1,14 @@
 package com.smlnskgmail.jaman.githubclient.view.profileslist
 
-import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfile
+import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubShortProfile
 
 interface ProfilesListView {
 
     fun showProfilesList(
-        profiles: List<GitHubProfile>
+        shortProfiles: List<GitHubShortProfile>
     )
     fun addToProfilesList(
-        profiles: List<GitHubProfile>
+        shortProfiles: List<GitHubShortProfile>
     )
 
     fun showLoadError()

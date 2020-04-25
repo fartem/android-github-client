@@ -1,5 +1,8 @@
 package com.smlnskgmail.jaman.githubclient.model.api
 
+import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubExpandedProfile
+import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubShortProfile
+
 interface GitHubProfilesApi {
 
     fun profilesPortion(
@@ -7,15 +10,29 @@ interface GitHubProfilesApi {
         profilesLoadCallback: ProfilesLoadCallback
     )
 
+    fun expandedProfileFor(
+        login: String,
+        expandedProfileLoadCallback: ProfileLoadCallback
+    )
+
     fun repositoriesFor(
-        profile: GitHubProfile,
+        login: String,
         repositoriesLoadCallback: RepositoriesLoadCallback
     )
 
     interface ProfilesLoadCallback {
 
         fun loadSuccess(
-            profiles: List<GitHubProfile>
+            shortProfiles: List<GitHubShortProfile>
+        )
+        fun loadError()
+
+    }
+
+    interface ProfileLoadCallback {
+
+        fun loadSuccess(
+            expandedProfile: GitHubExpandedProfile
         )
         fun loadError()
 

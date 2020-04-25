@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.smlnskgmail.jaman.githubclient.App
 import com.smlnskgmail.jaman.githubclient.R
 import com.smlnskgmail.jaman.githubclient.components.BaseFragment
-import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfile
+import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubShortProfile
 import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfilesApi
 import com.smlnskgmail.jaman.githubclient.presenter.profileslist.ProfilesListPresenter
 import com.smlnskgmail.jaman.githubclient.presenter.profileslist.ProfilesListPresenterImpl
@@ -23,7 +23,7 @@ class ProfilesListFragment : BaseFragment(), ProfilesListView, KodeinAware {
 
     private lateinit var profilesListPresenter: ProfilesListPresenter
 
-    private val profiles = mutableListOf<GitHubProfile>()
+    private val profiles = mutableListOf<GitHubShortProfile>()
 
     override fun onViewCreated(
         view: View,
@@ -45,11 +45,11 @@ class ProfilesListFragment : BaseFragment(), ProfilesListView, KodeinAware {
     }
 
     override fun showProfilesList(
-        profiles: List<GitHubProfile>
+        shortProfiles: List<GitHubShortProfile>
     ) {
-        this.profiles.addAll(profiles)
+        this.profiles.addAll(shortProfiles)
         profiles_list.layoutManager = LinearLayoutManager(context)
-        profiles_list.adapter = ProfilesListAdapter(profiles)
+        profiles_list.adapter = ProfilesListAdapter(shortProfiles)
 
         // TODO: refactor visibility set
         profiles_list_progress_bar_top.visibility = View.GONE
@@ -63,12 +63,12 @@ class ProfilesListFragment : BaseFragment(), ProfilesListView, KodeinAware {
     }
 
     override fun addToProfilesList(
-        profiles: List<GitHubProfile>
+        shortProfiles: List<GitHubShortProfile>
     ) {
-        this.profiles.addAll(profiles)
+        this.profiles.addAll(shortProfiles)
         profiles_list.adapter?.notifyItemInserted(
             profiles_list.adapter?.itemCount?.minus(
-                profiles.size
+                shortProfiles.size
             )!!
         )
     }

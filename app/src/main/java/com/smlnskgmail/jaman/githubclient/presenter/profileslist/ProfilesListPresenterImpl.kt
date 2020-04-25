@@ -1,6 +1,6 @@
 package com.smlnskgmail.jaman.githubclient.presenter.profileslist
 
-import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfile
+import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubShortProfile
 import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfilesApi
 import com.smlnskgmail.jaman.githubclient.view.profileslist.ProfilesListView
 
@@ -30,10 +30,10 @@ class ProfilesListPresenterImpl : ProfilesListPresenter {
             page++,
             object : GitHubProfilesApi.ProfilesLoadCallback {
                 override fun loadSuccess(
-                    profiles: List<GitHubProfile>
+                    shortProfiles: List<GitHubShortProfile>
                 ) {
                     profilesListView.showProfilesList(
-                        profiles
+                        shortProfiles
                     )
                 }
 

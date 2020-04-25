@@ -1,7 +1,7 @@
 package com.smlnskgmail.jaman.githubclient.model.impl.github
 
 import com.google.gson.GsonBuilder
-import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfile
+import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubShortProfile
 import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfilesApi
 import com.smlnskgmail.jaman.githubclient.model.impl.github.deserializers.GitHubProfilesDeserializer
 import com.smlnskgmail.jaman.githubclient.model.impl.github.deserializers.GitHubRepositoriesDeserializer
@@ -67,14 +67,21 @@ class GitHubApi : GitHubProfilesApi {
                 response: Response<GitHubProfilesResponse>
             ) {
                 profilesLoadCallback.loadSuccess(
-                    response.body()!!.profiles
+                    response.body()!!.shortProfiles
                 )
             }
         })
     }
 
+    override fun expandedProfileFor(
+        login: String,
+        expandedProfileLoadCallback: GitHubProfilesApi.ProfileLoadCallback
+    ) {
+        expandedProfileLoadCallback.loadError()
+    }
+
     override fun repositoriesFor(
-        profile: GitHubProfile,
+        login: String,
         repositoriesLoadCallback: GitHubProfilesApi.RepositoriesLoadCallback
     ) {
         repositoriesLoadCallback.loadSuccess(
