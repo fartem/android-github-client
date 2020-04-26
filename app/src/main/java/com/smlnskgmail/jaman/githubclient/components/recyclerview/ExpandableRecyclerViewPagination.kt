@@ -1,9 +1,9 @@
-package com.smlnskgmail.jaman.githubclient.components
+package com.smlnskgmail.jaman.githubclient.components.recyclerview
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class RecyclerViewPagination(
+abstract class ExpandableRecyclerViewPagination(
     private val layoutManager: LinearLayoutManager
 ) : RecyclerView.OnScrollListener() {
 

@@ -11,7 +11,6 @@ interface ProfilesListView {
         shortProfiles: List<GitHubShortProfile>
     )
 
-    fun showLoadLatest()
     fun showLoadError()
 
 }

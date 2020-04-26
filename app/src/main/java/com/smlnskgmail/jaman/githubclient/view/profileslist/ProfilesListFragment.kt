@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.smlnskgmail.jaman.githubclient.App
 import com.smlnskgmail.jaman.githubclient.R
 import com.smlnskgmail.jaman.githubclient.components.BaseFragment
-import com.smlnskgmail.jaman.githubclient.components.RecyclerViewPagination
+import com.smlnskgmail.jaman.githubclient.components.recyclerview.ExpandableRecyclerViewPagination
 import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfilesApi
 import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubShortProfile
 import com.smlnskgmail.jaman.githubclient.presenter.profileslist.ProfilesListPresenter
@@ -50,7 +50,7 @@ class ProfilesListFragment : BaseFragment(), ProfilesListView, KodeinAware {
 
         val layoutManager = LinearLayoutManager(context)
         profiles_list.layoutManager = layoutManager
-        profiles_list.addOnScrollListener(object : RecyclerViewPagination(layoutManager) {
+        profiles_list.addOnScrollListener(object : ExpandableRecyclerViewPagination(layoutManager) {
             override fun loadMoreItems() {
                 adapter.loadingStarted()
                 profilesListPresenter.loadMoreProfiles()
@@ -81,13 +81,9 @@ class ProfilesListFragment : BaseFragment(), ProfilesListView, KodeinAware {
         shortProfiles: List<GitHubShortProfile>
     ) {
         (profiles_list.adapter as ProfilesListAdapter).loadingEnded()
-        (profiles_list.adapter as ProfilesListAdapter).addProfiles(
+        (profiles_list.adapter as ProfilesListAdapter).addMore(
             shortProfiles
         )
-    }
-
-    override fun showLoadLatest() {
-
     }
 
     override fun showLoadError() {

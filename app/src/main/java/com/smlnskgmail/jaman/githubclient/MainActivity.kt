@@ -3,7 +3,7 @@ package com.smlnskgmail.jaman.githubclient
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.smlnskgmail.jaman.githubclient.components.BaseActivity
-import com.smlnskgmail.jaman.githubclient.view.profileslist.ProfilesListFragment
+import com.smlnskgmail.jaman.githubclient.view.profileinfo.ProfileInfoFragment
 
 class MainActivity : BaseActivity() {
 
@@ -11,7 +11,13 @@ class MainActivity : BaseActivity() {
         savedInstanceState: Bundle?
     ) {
         super.onCreate(savedInstanceState)
-        showFragment(ProfilesListFragment())
+
+        val fragment = ProfileInfoFragment()
+
+        val args = Bundle()
+        args.putString("profileId", "fartem")
+        fragment.arguments = args
+        showFragment(fragment)
     }
 
     private fun showFragment(

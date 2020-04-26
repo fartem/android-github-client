@@ -4,17 +4,19 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.smlnskgmail.jaman.githubclient.R
+import com.smlnskgmail.jaman.githubclient.components.recyclerview.ExpandableRecyclerViewAdapter
+import com.smlnskgmail.jaman.githubclient.components.recyclerview.ExpandableRecyclerViewHolder
+import com.smlnskgmail.jaman.githubclient.components.recyclerview.ExpandableRecyclerViewProgressHolder
 import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubShortProfile
 import kotlinx.android.synthetic.main.item_profile.view.*
 
 class ProfilesListAdapter(
     initShortProfiles: List<GitHubShortProfile>
-) : RecyclerView.Adapter<ProfilesListAdapter.ProfileHolder>() {
+) : ExpandableRecyclerViewAdapter<GitHubShortProfile>() {
 
     companion object {
 
@@ -33,16 +35,14 @@ class ProfilesListAdapter(
         )
     }
 
-    fun addProfiles(
-        shortProfiles: List<GitHubShortProfile>
+    override fun addMore(
+        items: List<GitHubShortProfile>
     ) {
         val lastIndex = itemCount
-        this.shortProfiles.addAll(
-            shortProfiles
-        )
+        shortProfiles.addAll(items)
         notifyItemRangeInserted(
             lastIndex,
-            shortProfiles.size
+            items.size
         )
     }
 
@@ -75,9 +75,9 @@ class ProfilesListAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ProfileHolder {
+    ): ExpandableRecyclerViewHolder<GitHubShortProfile> {
         return if (viewType == viewTypeLoading) {
-            ProgressHolder(
+            ExpandableRecyclerViewProgressHolder(
                 LayoutInflater.from(parent.context).inflate(
                     R.layout.item_loading,
                     parent,
@@ -96,7 +96,7 @@ class ProfilesListAdapter(
     }
 
     override fun onBindViewHolder(
-        holder: ProfileHolder,
+        holder: ExpandableRecyclerViewHolder<GitHubShortProfile>,
         position: Int
     ) {
         holder.bind(shortProfiles[position])
@@ -122,20 +122,20 @@ class ProfilesListAdapter(
 
     open inner class ProfileHolder(
         itemView: View
-    ) : RecyclerView.ViewHolder(itemView) {
+    ) : ExpandableRecyclerViewHolder<GitHubShortProfile>(itemView) {
 
         @SuppressLint("CheckResult")
-        open fun bind(gitHubShortProfile: GitHubShortProfile) {
-            itemView.profile_login.text = gitHubShortProfile.login
-            itemView.profile_type.text = gitHubShortProfile.type
-            if (gitHubShortProfile.photoUrl != null) {
+        override fun bind(item: GitHubShortProfile) {
+            itemView.profile_login.text = item.login
+            itemView.profile_type.text = item.type
+            if (item.photoUrl != null) {
                 val requestOptions = RequestOptions()
-                requestOptions.override(100, 100)
+                requestOptions.override(150, 150)
 
                 Glide.with(itemView.context!!)
                     .asBitmap()
                     .apply(requestOptions)
-                    .load(gitHubShortProfile.photoUrl)
+                    .load(item.photoUrl)
                     .diskCacheStrategy(DiskCacheStrategy.DATA)
                     .into(itemView.profile_avatar)
             } else {
@@ -143,18 +143,6 @@ class ProfilesListAdapter(
                     R.drawable.ic_profile
                 )
             }
-        }
-
-    }
-
-    inner class ProgressHolder(
-        itemView: View
-    ) : ProfileHolder(itemView) {
-
-        override fun bind(
-            gitHubShortProfile: GitHubShortProfile
-        ) {
-
         }
 
     }
