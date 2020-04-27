@@ -79,7 +79,7 @@ class ProfilesListAdapter(
         return if (viewType == viewTypeLoading) {
             ExpandableRecyclerViewProgressHolder(
                 LayoutInflater.from(parent.context).inflate(
-                    R.layout.item_loading,
+                    R.layout.item_load,
                     parent,
                     false
                 )

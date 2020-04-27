@@ -48,7 +48,7 @@ class ProfileInfoPresenterImpl : ProfileInfoPresenter {
     override fun loadMoreRepositories() {
         gitHubProfilesApi.repositoriesFor(
             profileId,
-            repositoriesPage++,
+            ++repositoriesPage,
             object : GitHubProfilesApi.RepositoriesLoadCallback {
                 override fun loadSuccess(
                     repositories: List<GitHubRepository>

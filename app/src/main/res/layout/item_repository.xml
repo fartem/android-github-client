@@ -36,8 +36,8 @@
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_star"
             android:drawablePadding="4dp"
-            android:layout_centerVertical="true"
             android:gravity="center"
+            android:textSize="12sp"
             tools:text="\?" />
 
         <TextView
@@ -48,16 +48,20 @@
             android:layout_toEndOf="@id/repository_stars"
             android:drawableStart="@drawable/ic_fork"
             android:drawablePadding="4dp"
-            android:layout_centerVertical="true"
             android:gravity="center"
+            android:textSize="12sp"
             tools:text="\?" />
 
         <TextView
             android:id="@+id/repository_language"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/repository_stars"
+            android:gravity="center"
+            android:drawableStart="@drawable/ic_dot"
+            android:drawablePadding="4dp"
+            android:textSize="12sp"
             tools:text="Kotlin" />
 
     </RelativeLayout>

@@ -22,8 +22,8 @@ interface GitHubApiService {
 
     @GET("/users/{user}/repos")
     fun repositories(
-        @Query("user") profileId: String,
-        @Query("per_page") offset: Int
+        @Path("user") profileId: String,
+        @Query("page") page: Int
     ): Call<GitHubRepositoriesResponse>
 
 }

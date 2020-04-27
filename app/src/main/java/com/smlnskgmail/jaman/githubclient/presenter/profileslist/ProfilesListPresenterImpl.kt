@@ -31,7 +31,7 @@ class ProfilesListPresenterImpl : ProfilesListPresenter {
     override fun loadMoreProfiles() {
         profilesLoading = true
         gitHubProfilesApi.profilesPortion(
-            page++,
+            ++page,
             object : GitHubProfilesApi.ProfilesLoadCallback {
                 override fun loadSuccess(
                     shortProfiles: List<GitHubShortProfile>
