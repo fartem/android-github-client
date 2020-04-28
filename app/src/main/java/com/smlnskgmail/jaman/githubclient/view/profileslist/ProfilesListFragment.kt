@@ -92,7 +92,7 @@ class ProfilesListFragment : BaseFragment(),
     }
 
     override fun showLoadError() {
-
+        (profiles_list.adapter as ProfilesListAdapter).loadingEnded()
     }
 
     override fun showProfileInfo(

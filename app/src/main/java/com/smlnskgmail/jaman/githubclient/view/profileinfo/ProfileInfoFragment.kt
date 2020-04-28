@@ -94,6 +94,22 @@ class ProfileInfoFragment : BaseFragment(), ProfileInfoView, KodeinAware {
         repositories_progress_bar.visibility = View.GONE
         repositories_list.visibility = View.VISIBLE
 
+        val bufferedReader = BufferedReader(
+            InputStreamReader(
+                resources.openRawResource(
+                    R.raw.languages
+                )
+            )
+        )
+        val languages = JsonParser().parse(
+            bufferedReader
+        ).asJsonObject
+        val adapter = RepositoriesListAdapter(
+            gitHubRepositories,
+            languages
+        )
+        repositories_list.adapter = adapter
+
         val layoutManager = LinearLayoutManager(context)
         repositories_list.layoutManager = layoutManager
         repositories_list.addOnScrollListener(
@@ -101,6 +117,7 @@ class ProfileInfoFragment : BaseFragment(), ProfileInfoView, KodeinAware {
                 layoutManager
             ) {
                 override fun loadMoreItems() {
+                    adapter.loadingStarted()
                     profileInfoPresenter.loadMoreRepositories()
                 }
 
@@ -113,33 +130,19 @@ class ProfileInfoFragment : BaseFragment(), ProfileInfoView, KodeinAware {
                 }
             }
         )
-
-        val bufferedReader = BufferedReader(
-            InputStreamReader(
-                resources.openRawResource(
-                    R.raw.languages
-                )
-            )
-        )
-        val languages = JsonParser().parse(
-            bufferedReader
-        ).asJsonObject
-        repositories_list.adapter = RepositoriesListAdapter(
-            gitHubRepositories,
-            languages
-        )
     }
 
     override fun addToRepositoriesList(
         gitHubRepositories: List<GitHubRepository>
     ) {
+        (repositories_list.adapter as RepositoriesListAdapter).loadingEnded()
         (repositories_list.adapter as RepositoriesListAdapter).addMore(
             gitHubRepositories
         )
     }
 
     override fun showLoadError() {
-
+        (repositories_list.adapter as RepositoriesListAdapter).loadingEnded()
     }
 
     override fun layoutResId(): Int {

@@ -31,7 +31,7 @@ class RepositoriesListAdapter(
     private var loaderIsVisible = false
 
     init {
-        this.repositories.addAll(
+        repositories.addAll(
             initRepositories
         )
     }
@@ -44,6 +44,33 @@ class RepositoriesListAdapter(
         notifyItemRangeInserted(
             lastIndex,
             items.size
+        )
+    }
+
+    fun loadingStarted() {
+        loaderIsVisible = true
+        repositories.add(
+            GitHubRepository(
+                "",
+                "",
+                "",
+                -1,
+                -1
+            )
+        )
+        notifyItemInserted(
+            itemCount - 1
+        )
+    }
+
+    fun loadingEnded() {
+        loaderIsVisible = false
+        val progressItemIndex = itemCount - 1
+        notifyItemRemoved(
+            progressItemIndex
+        )
+        repositories.removeAt(
+            progressItemIndex
         )
     }
 

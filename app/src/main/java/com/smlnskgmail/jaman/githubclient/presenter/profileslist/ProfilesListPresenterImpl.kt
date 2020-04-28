@@ -25,6 +25,7 @@ class ProfilesListPresenterImpl : ProfilesListPresenter {
 
     override fun reloadProfiles() {
         page = 0
+        isLastPage = false
         loadMoreProfiles()
     }
 
@@ -49,6 +50,9 @@ class ProfilesListPresenterImpl : ProfilesListPresenter {
                 }
 
                 override fun loadError() {
+                    isLastPage = true
+                    profilesLoading = false
+
                     profilesListView.showLoadError()
                     profilesLoading = false
                 }
