@@ -15,7 +15,8 @@ import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubShortProfile
 import kotlinx.android.synthetic.main.item_profile.view.*
 
 class ProfilesListAdapter(
-    initShortProfiles: List<GitHubShortProfile>
+    initShortProfiles: List<GitHubShortProfile>,
+    private val profileSelectTarget: ProfileSelectTarget
 ) : ExpandableRecyclerViewAdapter<GitHubShortProfile>() {
 
     companion object {
@@ -143,7 +144,20 @@ class ProfilesListAdapter(
                     R.drawable.ic_profile
                 )
             }
+            itemView.setOnClickListener {
+                profileSelectTarget.profileSelected(
+                    item
+                )
+            }
         }
+
+    }
+
+    interface ProfileSelectTarget {
+
+        fun profileSelected(
+            gitHubProfile: GitHubShortProfile
+        )
 
     }
 

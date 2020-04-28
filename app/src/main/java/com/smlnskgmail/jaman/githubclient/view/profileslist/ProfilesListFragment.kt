@@ -5,6 +5,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.smlnskgmail.jaman.githubclient.App
 import com.smlnskgmail.jaman.githubclient.R
+import com.smlnskgmail.jaman.githubclient.components.AppNavigator
 import com.smlnskgmail.jaman.githubclient.components.BaseFragment
 import com.smlnskgmail.jaman.githubclient.components.recyclerview.ExpandableRecyclerViewPagination
 import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfilesApi
@@ -16,7 +17,8 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.instance
 
-class ProfilesListFragment : BaseFragment(), ProfilesListView, KodeinAware {
+class ProfilesListFragment : BaseFragment(),
+    ProfilesListView, KodeinAware, ProfilesListAdapter.ProfileSelectTarget {
 
     override lateinit var kodein: Kodein
 
@@ -46,7 +48,10 @@ class ProfilesListFragment : BaseFragment(), ProfilesListView, KodeinAware {
     override fun showProfilesList(
         shortProfiles: List<GitHubShortProfile>
     ) {
-        val adapter = ProfilesListAdapter(shortProfiles)
+        val adapter = ProfilesListAdapter(
+            shortProfiles,
+            this
+        )
 
         val layoutManager = LinearLayoutManager(context)
         profiles_list.layoutManager = layoutManager
@@ -90,8 +95,24 @@ class ProfilesListFragment : BaseFragment(), ProfilesListView, KodeinAware {
 
     }
 
+    override fun showProfileInfo(
+        gitHubProfile: GitHubShortProfile
+    ) {
+        (activity as AppNavigator).showProfileInfoFor(
+            gitHubProfile.login
+        )
+    }
+
     override fun layoutResId(): Int {
         return R.layout.fragment_profiles_list
+    }
+
+    override fun profileSelected(
+        gitHubProfile: GitHubShortProfile
+    ) {
+        profilesListPresenter.profileSelect(
+            gitHubProfile
+        )
     }
 
 }

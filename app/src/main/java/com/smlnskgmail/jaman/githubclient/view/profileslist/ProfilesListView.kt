@@ -13,4 +13,8 @@ interface ProfilesListView {
 
     fun showLoadError()
 
+    fun showProfileInfo(
+        gitHubProfile: GitHubShortProfile
+    )
+
 }

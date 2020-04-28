@@ -64,4 +64,12 @@ class ProfilesListPresenterImpl : ProfilesListPresenter {
         return isLastPage
     }
 
+    override fun profileSelect(
+        gitHubProfile: GitHubShortProfile
+    ) {
+        profilesListView.showProfileInfo(
+            gitHubProfile
+        )
+    }
+
 }
