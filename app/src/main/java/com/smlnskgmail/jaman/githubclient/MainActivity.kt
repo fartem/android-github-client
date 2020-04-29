@@ -1,11 +1,13 @@
 package com.smlnskgmail.jaman.githubclient
 
 import android.os.Bundle
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.fragment.app.Fragment
 import com.smlnskgmail.jaman.githubclient.components.AppNavigator
 import com.smlnskgmail.jaman.githubclient.components.BaseActivity
 import com.smlnskgmail.jaman.githubclient.view.profileinfo.ProfileInfoFragment
 import com.smlnskgmail.jaman.githubclient.view.profileslist.ProfilesListFragment
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity(), AppNavigator {
 
@@ -13,6 +15,19 @@ class MainActivity : BaseActivity(), AppNavigator {
         savedInstanceState: Bundle?
     ) {
         super.onCreate(savedInstanceState)
+        setSupportActionBar(main_toolbar)
+
+        val toggle = ActionBarDrawerToggle(
+            this,
+            main_drawer,
+            main_toolbar,
+            R.string.app_name,
+            R.string.app_name
+        )
+        toggle.isDrawerIndicatorEnabled = true
+        main_drawer.addDrawerListener(toggle)
+        toggle.syncState()
+
         showFragment(ProfilesListFragment())
     }
 
