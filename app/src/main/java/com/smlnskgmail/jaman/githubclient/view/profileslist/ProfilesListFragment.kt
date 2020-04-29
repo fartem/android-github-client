@@ -5,6 +5,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.smlnskgmail.jaman.githubclient.App
 import com.smlnskgmail.jaman.githubclient.R
+import com.smlnskgmail.jaman.githubclient.components.AppLongToast
 import com.smlnskgmail.jaman.githubclient.components.AppNavigator
 import com.smlnskgmail.jaman.githubclient.components.BaseFragment
 import com.smlnskgmail.jaman.githubclient.components.recyclerview.ExpandableRecyclerViewPagination
@@ -74,6 +75,7 @@ class ProfilesListFragment : BaseFragment(),
         // TODO: refactor visibility set
         profiles_list_progress_bar_top.visibility = View.GONE
         profiles_list_progress_bar_center.visibility = View.GONE
+
         profiles_list_refresh.isRefreshing = false
         profiles_list_refresh.isEnabled = true
         profiles_list_refresh.setOnRefreshListener {
@@ -92,7 +94,13 @@ class ProfilesListFragment : BaseFragment(),
     }
 
     override fun showLoadError() {
-        (profiles_list.adapter as ProfilesListAdapter).loadingEnded()
+        if (profiles_list.adapter != null) {
+            (profiles_list.adapter as ProfilesListAdapter).loadingEnded()
+        }
+        AppLongToast(
+            context!!,
+            getString(R.string.message_load_error)
+        ).show()
     }
 
     override fun showProfileInfo(

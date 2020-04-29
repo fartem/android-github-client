@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">GitHub Client</string>
+
+    <string name="message_load_error">Load error! Please try again!</string>
 </resources>

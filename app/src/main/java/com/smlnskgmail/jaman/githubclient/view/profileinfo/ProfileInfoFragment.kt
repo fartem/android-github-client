@@ -10,6 +10,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.gson.JsonParser
 import com.smlnskgmail.jaman.githubclient.App
 import com.smlnskgmail.jaman.githubclient.R
+import com.smlnskgmail.jaman.githubclient.components.AppLongToast
 import com.smlnskgmail.jaman.githubclient.components.BaseFragment
 import com.smlnskgmail.jaman.githubclient.components.recyclerview.ExpandableRecyclerViewPagination
 import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfilesApi
@@ -142,7 +143,13 @@ class ProfileInfoFragment : BaseFragment(), ProfileInfoView, KodeinAware {
     }
 
     override fun showLoadError() {
-        (repositories_list.adapter as RepositoriesListAdapter).loadingEnded()
+        if (repositories_list.adapter != null) {
+            (repositories_list.adapter as RepositoriesListAdapter).loadingEnded()
+        }
+        AppLongToast(
+            context!!,
+            getString(R.string.message_load_error)
+        ).show()
     }
 
     override fun layoutResId(): Int {
