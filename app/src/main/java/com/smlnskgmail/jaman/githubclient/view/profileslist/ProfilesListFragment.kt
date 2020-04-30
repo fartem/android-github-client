@@ -70,6 +70,7 @@ class ProfilesListFragment : BaseFragment(),
                 return profilesListPresenter.isLastPage()
             }
         })
+        profiles_list.messageView = profiles_list_message_view
         profiles_list.adapter = adapter
 
         // TODO: refactor visibility set
