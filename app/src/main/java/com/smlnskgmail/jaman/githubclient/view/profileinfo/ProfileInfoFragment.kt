@@ -30,6 +30,8 @@ class ProfileInfoFragment : BaseFragment(), ProfileInfoView, KodeinAware {
 
         const val profileIdKey = "profileId"
 
+        private const val optimalImageSize = 150
+
     }
 
     override val kodein by lazy {
@@ -80,7 +82,10 @@ class ProfileInfoFragment : BaseFragment(), ProfileInfoView, KodeinAware {
         }
         if (expandedProfile.photoUrl != null) {
             val requestOptions = RequestOptions()
-            requestOptions.override(150, 150)
+            requestOptions.override(
+                optimalImageSize,
+                optimalImageSize
+            )
 
             Glide.with(context!!)
                 .asBitmap()

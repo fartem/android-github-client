@@ -48,9 +48,11 @@ class MainActivity : BaseActivity(), AppNavigator {
         profileId: String
     ) {
         val fragment = ProfileInfoFragment()
-
         val args = Bundle()
-        args.putString("profileId", profileId)
+        args.putString(
+            ProfileInfoFragment.profileIdKey,
+            profileId
+        )
         fragment.arguments = args
         showFragment(fragment)
     }

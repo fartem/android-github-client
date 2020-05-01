@@ -73,7 +73,6 @@ class ProfilesListFragment : BaseFragment(),
         profiles_list.messageView = profiles_list_message_view
         profiles_list.adapter = adapter
 
-        // TODO: refactor visibility set
         profiles_list_progress_bar_top.visibility = View.GONE
         profiles_list_progress_bar_center.visibility = View.GONE
 
