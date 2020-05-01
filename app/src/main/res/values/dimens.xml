@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="common_margin">16dp</dimen>
+    <dimen name="common_margin_half">8dp</dimen>
+
+    <dimen name="common_padding">16dp</dimen>
+    <dimen name="common_padding_half">8dp</dimen>
+
+    <dimen name="item_load_height">48dp</dimen>
+
+    <dimen name="image_size_profile_in_list">48dp</dimen>
+    <dimen name="image_size_profile_info">54dp</dimen>
+
+    <dimen name="image_size_icon">16dp</dimen>
+    <dimen name="image_size_icon_large">16dp</dimen>
+    <dimen name="image_size_dot">12dp</dimen>
+
+    <dimen name="text_size_title">18sp</dimen>
+    <dimen name="text_size_subtitle">12sp</dimen>
+    <dimen name="text_size_medium">16sp</dimen>
+</resources>

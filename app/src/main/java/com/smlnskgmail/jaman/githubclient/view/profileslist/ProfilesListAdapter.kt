@@ -24,6 +24,8 @@ class ProfilesListAdapter(
         private const val viewTypeItem = 0
         private const val viewTypeLoading = 1
 
+        private const val optimalImageSize = 150
+
     }
 
     private val shortProfiles = mutableListOf<GitHubShortProfile>()
@@ -131,7 +133,10 @@ class ProfilesListAdapter(
             itemView.profile_type.text = item.type
             if (item.photoUrl != null) {
                 val requestOptions = RequestOptions()
-                requestOptions.override(150, 150)
+                requestOptions.override(
+                    optimalImageSize,
+                    optimalImageSize
+                )
 
                 Glide.with(itemView.context!!)
                     .asBitmap()

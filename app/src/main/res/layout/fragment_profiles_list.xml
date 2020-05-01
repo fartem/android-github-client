@@ -2,48 +2,36 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:arv="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white">
+    style="@style/AppContainer"
+    android:background="@color/colorWhite">
 
     <ProgressBar
         android:id="@+id/profiles_list_progress_bar_top"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-7dp"
-        android:layout_marginBottom="-7dp"
-        android:indeterminateOnly="true"
+        style="@style/AppTopProgressBar"
         android:visibility="gone"
         tools:visibility="visible" />
 
     <ProgressBar
         android:id="@+id/profiles_list_progress_bar_center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/AppProgressBar"
         android:layout_gravity="center" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/profiles_list_refresh"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        style="@style/AppContainer">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <FrameLayout style="@style/AppContainer">
 
             <com.smlnskgmail.jaman.adaptiverecyclerview.AdaptiveMessageView
                 android:id="@+id/profiles_list_message_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                style="@style/AppContainer"
                 android:visibility="gone"
-                arv:message_text="Profiles list is empty!"
+                arv:message_text="@string/message_profiles_list_empty"
                 arv:message_text_at_center="true" />
 
             <com.smlnskgmail.jaman.adaptiverecyclerview.AdaptiveRecyclerView
                 android:id="@+id/profiles_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                style="@style/AppRecyclerView" />
 
         </FrameLayout>
 

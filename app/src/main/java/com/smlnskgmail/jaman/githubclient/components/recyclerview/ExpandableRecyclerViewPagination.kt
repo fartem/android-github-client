@@ -7,12 +7,6 @@ abstract class ExpandableRecyclerViewPagination(
     private val layoutManager: LinearLayoutManager
 ) : RecyclerView.OnScrollListener() {
 
-    companion object {
-
-        private var startPage = 1
-
-    }
-
     override fun onScrolled(
         recyclerView: RecyclerView,
         dx: Int,

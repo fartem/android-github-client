@@ -5,4 +5,9 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="colorLauncherBackground">#D81B60</color>
+
+    <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorGreyDark">#424242</color>
+    <color name="colorGrey">#bdbdbd</color>
 </resources>

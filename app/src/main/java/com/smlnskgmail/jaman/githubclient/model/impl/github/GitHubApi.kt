@@ -57,7 +57,7 @@ class GitHubApi : GitHubProfilesApi {
         page: Int,
         profilesLoadCallback: GitHubProfilesApi.ProfilesLoadCallback
     ) {
-        if (page == 0) {
+        if (page == 1) {
             lastId = 0
         }
         gitHubApiService.profilesPortion(

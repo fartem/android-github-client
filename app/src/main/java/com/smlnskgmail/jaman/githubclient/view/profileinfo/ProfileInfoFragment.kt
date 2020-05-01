@@ -26,6 +26,12 @@ import java.io.InputStreamReader
 
 class ProfileInfoFragment : BaseFragment(), ProfileInfoView, KodeinAware {
 
+    companion object {
+
+        const val profileIdKey = "profileId"
+
+    }
+
     override val kodein by lazy {
         (context?.applicationContext as App).kodein
     }
@@ -43,7 +49,7 @@ class ProfileInfoFragment : BaseFragment(), ProfileInfoView, KodeinAware {
             gitHubProfilesApi,
             this,
             arguments!!.getString(
-                "profileId",
+                profileIdKey,
             null
             )
         )

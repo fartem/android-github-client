@@ -1,64 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@android:color/white">
+    style="@style/AppContainer"
+    android:background="@color/colorWhite">
 
     <ProgressBar
         android:id="@+id/profile_progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/AppProgressBar"
         android:layout_centerInParent="true" />
 
     <LinearLayout
         android:id="@+id/profile_panel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
+        android:padding="@dimen/common_padding"
         android:orientation="horizontal"
         android:visibility="gone"
         tools:visibility="visible">
 
         <ImageView
             android:id="@+id/profile_avatar"
-            android:layout_width="54dp"
-            android:layout_height="54dp"
+            android:layout_width="@dimen/image_size_profile_info"
+            android:layout_height="@dimen/image_size_profile_info"
             android:layout_gravity="center" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/common_margin"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/profile_login"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
+                style="@style/AppProfileInfoTextView"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/text_size_title"
                 tools:text="fartem" />
 
             <TextView
                 android:id="@+id/profile_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
+                style="@style/AppProfileInfoSubTextView"
                 tools:text="Artem Fomchenkov" />
 
             <TextView
                 android:id="@+id/profile_company"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="12sp" />
+                style="@style/AppProfileInfoSubTextView" />
 
             <TextView
                 android:id="@+id/profile_location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
+                style="@style/AppProfileInfoSubTextView"
                 tools:text="Russia, Smolensk" />
 
         </LinearLayout>
@@ -66,20 +56,17 @@
     </LinearLayout>
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        style="@style/AppContainer"
         android:layout_below="@id/profile_panel">
 
         <ProgressBar
             android:id="@+id/repositories_progress_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/AppProgressBar"
             android:layout_gravity="center" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/repositories_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            style="@style/AppRecyclerView"
             android:visibility="gone"
             tools:visibility="visible" />
 
