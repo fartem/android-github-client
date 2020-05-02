@@ -85,9 +85,7 @@ class SharedPreferencesAppCache(
                 )
                 .apply()
         } else {
-            showedProfilesIds.removeAt(
-                AppCache.profilesMaxCount
-            )
+            showedProfilesIds.removeAt(0)
         }
         sharedPreferences.edit()
             .putString(
