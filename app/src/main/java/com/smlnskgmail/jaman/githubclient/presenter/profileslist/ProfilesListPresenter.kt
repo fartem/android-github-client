@@ -1,13 +1,15 @@
 package com.smlnskgmail.jaman.githubclient.presenter.profileslist
 
-import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfilesApi
-import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubShortProfile
+import com.smlnskgmail.jaman.githubclient.model.api.cache.AppCache
+import com.smlnskgmail.jaman.githubclient.model.api.github.GitHubProfilesApi
+import com.smlnskgmail.jaman.githubclient.model.api.github.profiles.GitHubShortProfile
 import com.smlnskgmail.jaman.githubclient.view.profileslist.ProfilesListView
 
 interface ProfilesListPresenter {
 
     fun init(
         gitHubProfilesApi: GitHubProfilesApi,
+        appCache: AppCache,
         profilesListView: ProfilesListView
     )
 

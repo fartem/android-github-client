@@ -1,4 +1,4 @@
-package com.smlnskgmail.jaman.githubclient.model.api.profiles
+package com.smlnskgmail.jaman.githubclient.model.api.github.profiles
 
 data class GitHubShortProfile(
     val id: Int,

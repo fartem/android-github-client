@@ -9,8 +9,9 @@ import com.smlnskgmail.jaman.githubclient.components.AppLongToast
 import com.smlnskgmail.jaman.githubclient.components.AppNavigator
 import com.smlnskgmail.jaman.githubclient.components.BaseFragment
 import com.smlnskgmail.jaman.githubclient.components.recyclerview.ExpandableRecyclerViewPagination
-import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfilesApi
-import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubShortProfile
+import com.smlnskgmail.jaman.githubclient.model.api.cache.AppCache
+import com.smlnskgmail.jaman.githubclient.model.api.github.GitHubProfilesApi
+import com.smlnskgmail.jaman.githubclient.model.api.github.profiles.GitHubShortProfile
 import com.smlnskgmail.jaman.githubclient.presenter.profileslist.ProfilesListPresenter
 import com.smlnskgmail.jaman.githubclient.presenter.profileslist.ProfilesListPresenterImpl
 import kotlinx.android.synthetic.main.fragment_profiles_list.*
@@ -24,6 +25,7 @@ class ProfilesListFragment : BaseFragment(),
     override lateinit var kodein: Kodein
 
     private val gitHubProfilesApi: GitHubProfilesApi by instance<GitHubProfilesApi>()
+    private val appCache: AppCache by instance<AppCache>()
 
     private lateinit var profilesListPresenter: ProfilesListPresenter
 
@@ -40,6 +42,7 @@ class ProfilesListFragment : BaseFragment(),
         profilesListPresenter = ProfilesListPresenterImpl()
         profilesListPresenter.init(
             gitHubProfilesApi,
+            appCache,
             this
         )
 

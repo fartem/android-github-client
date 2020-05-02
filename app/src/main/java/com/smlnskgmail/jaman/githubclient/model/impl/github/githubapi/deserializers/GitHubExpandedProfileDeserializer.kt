@@ -1,11 +1,11 @@
-package com.smlnskgmail.jaman.githubclient.model.impl.github.deserializers
+package com.smlnskgmail.jaman.githubclient.model.impl.github.githubapi.deserializers
 
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
-import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubExpandedProfile
-import com.smlnskgmail.jaman.githubclient.model.impl.github.retrofit.responcses.GitHubExpandedProfileResponse
+import com.smlnskgmail.jaman.githubclient.model.api.github.profiles.GitHubExpandedProfile
+import com.smlnskgmail.jaman.githubclient.model.impl.github.githubapi.retrofit.responcses.GitHubExpandedProfileResponse
 import java.lang.reflect.Type
 
 class GitHubExpandedProfileDeserializer : JsonDeserializer<GitHubExpandedProfileResponse> {

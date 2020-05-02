@@ -1,9 +1,11 @@
 package com.smlnskgmail.jaman.githubclient
 
 import android.app.Application
-import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfilesApi
-import com.smlnskgmail.jaman.githubclient.model.impl.fake.FakeGitHubApi
-import com.smlnskgmail.jaman.githubclient.model.impl.github.GitHubApi
+import com.smlnskgmail.jaman.githubclient.model.api.cache.AppCache
+import com.smlnskgmail.jaman.githubclient.model.api.github.GitHubProfilesApi
+import com.smlnskgmail.jaman.githubclient.model.impl.cache.SharedPreferencesAppCache
+import com.smlnskgmail.jaman.githubclient.model.impl.github.fake.FakeGitHubApi
+import com.smlnskgmail.jaman.githubclient.model.impl.github.githubapi.GitHubApi
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.KodeinTrigger
@@ -20,6 +22,11 @@ class App : Application(), KodeinAware {
             } else {
                 FakeGitHubApi()
             }
+        }
+        bind<AppCache>() with singleton {
+            SharedPreferencesAppCache(
+                this@App
+            )
         }
     }
 

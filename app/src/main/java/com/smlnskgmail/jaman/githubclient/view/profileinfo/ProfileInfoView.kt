@@ -1,7 +1,7 @@
 package com.smlnskgmail.jaman.githubclient.view.profileinfo
 
-import com.smlnskgmail.jaman.githubclient.model.api.GitHubRepository
-import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubExpandedProfile
+import com.smlnskgmail.jaman.githubclient.model.api.github.GitHubRepository
+import com.smlnskgmail.jaman.githubclient.model.api.github.profiles.GitHubExpandedProfile
 
 interface ProfileInfoView {
 

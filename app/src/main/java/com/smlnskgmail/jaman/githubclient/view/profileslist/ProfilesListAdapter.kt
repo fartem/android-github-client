@@ -11,7 +11,7 @@ import com.smlnskgmail.jaman.githubclient.R
 import com.smlnskgmail.jaman.githubclient.components.recyclerview.ExpandableRecyclerViewAdapter
 import com.smlnskgmail.jaman.githubclient.components.recyclerview.ExpandableRecyclerViewHolder
 import com.smlnskgmail.jaman.githubclient.components.recyclerview.ExpandableRecyclerViewProgressHolder
-import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubShortProfile
+import com.smlnskgmail.jaman.githubclient.model.api.github.profiles.GitHubShortProfile
 import kotlinx.android.synthetic.main.item_profile.view.*
 
 class ProfilesListAdapter(

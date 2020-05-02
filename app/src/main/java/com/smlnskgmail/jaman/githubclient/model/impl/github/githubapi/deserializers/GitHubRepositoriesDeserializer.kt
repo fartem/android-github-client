@@ -1,8 +1,8 @@
-package com.smlnskgmail.jaman.githubclient.model.impl.github.deserializers
+package com.smlnskgmail.jaman.githubclient.model.impl.github.githubapi.deserializers
 
 import com.google.gson.*
-import com.smlnskgmail.jaman.githubclient.model.api.GitHubRepository
-import com.smlnskgmail.jaman.githubclient.model.impl.github.retrofit.responcses.GitHubRepositoriesResponse
+import com.smlnskgmail.jaman.githubclient.model.api.github.GitHubRepository
+import com.smlnskgmail.jaman.githubclient.model.impl.github.githubapi.retrofit.responcses.GitHubRepositoriesResponse
 import java.lang.reflect.Type
 
 class GitHubRepositoriesDeserializer : JsonDeserializer<GitHubRepositoriesResponse> {

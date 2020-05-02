@@ -1,6 +1,6 @@
 package com.smlnskgmail.jaman.githubclient.view.profileslist
 
-import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubShortProfile
+import com.smlnskgmail.jaman.githubclient.model.api.github.profiles.GitHubShortProfile
 
 interface ProfilesListView {
 

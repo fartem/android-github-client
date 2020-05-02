@@ -1,12 +1,14 @@
 package com.smlnskgmail.jaman.githubclient.presenter.profileslist
 
-import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfilesApi
-import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubShortProfile
+import com.smlnskgmail.jaman.githubclient.model.api.cache.AppCache
+import com.smlnskgmail.jaman.githubclient.model.api.github.GitHubProfilesApi
+import com.smlnskgmail.jaman.githubclient.model.api.github.profiles.GitHubShortProfile
 import com.smlnskgmail.jaman.githubclient.view.profileslist.ProfilesListView
 
 class ProfilesListPresenterImpl : ProfilesListPresenter {
 
     private lateinit var gitHubProfilesApi: GitHubProfilesApi
+    private lateinit var appCache: AppCache
     private lateinit var profilesListView: ProfilesListView
 
     private var page: Int = 0
@@ -16,9 +18,11 @@ class ProfilesListPresenterImpl : ProfilesListPresenter {
 
     override fun init(
         gitHubProfilesApi: GitHubProfilesApi,
+        appCache: AppCache,
         profilesListView: ProfilesListView
     ) {
         this.gitHubProfilesApi = gitHubProfilesApi
+        this.appCache = appCache
         this.profilesListView = profilesListView
         loadMoreProfiles()
     }
@@ -71,6 +75,9 @@ class ProfilesListPresenterImpl : ProfilesListPresenter {
     override fun profileSelect(
         gitHubProfile: GitHubShortProfile
     ) {
+        appCache.saveShowedUserId(
+            gitHubProfile.login
+        )
         profilesListView.showProfileInfo(
             gitHubProfile
         )

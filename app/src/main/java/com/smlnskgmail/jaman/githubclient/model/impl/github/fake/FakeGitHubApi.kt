@@ -1,15 +1,16 @@
-package com.smlnskgmail.jaman.githubclient.model.impl.fake
+package com.smlnskgmail.jaman.githubclient.model.impl.github.fake
 
-import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfilesApi
-import com.smlnskgmail.jaman.githubclient.model.api.GitHubRepository
-import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubExpandedProfile
-import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubShortProfile
+import com.smlnskgmail.jaman.githubclient.model.api.github.GitHubProfilesApi
+import com.smlnskgmail.jaman.githubclient.model.api.github.GitHubRepository
+import com.smlnskgmail.jaman.githubclient.model.api.github.profiles.GitHubExpandedProfile
+import com.smlnskgmail.jaman.githubclient.model.api.github.profiles.GitHubShortProfile
 
 @SuppressWarnings(
     "StringLiteralDuplication",
     "MagicNumber"
 )
-class FakeGitHubApi : GitHubProfilesApi {
+class FakeGitHubApi :
+    GitHubProfilesApi {
 
     private val profiles = mutableListOf<GitHubShortProfile>()
 

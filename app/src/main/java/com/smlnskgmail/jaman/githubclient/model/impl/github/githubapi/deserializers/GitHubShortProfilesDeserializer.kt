@@ -1,8 +1,8 @@
-package com.smlnskgmail.jaman.githubclient.model.impl.github.deserializers
+package com.smlnskgmail.jaman.githubclient.model.impl.github.githubapi.deserializers
 
 import com.google.gson.*
-import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubShortProfile
-import com.smlnskgmail.jaman.githubclient.model.impl.github.retrofit.responcses.GitHubShortProfilesResponse
+import com.smlnskgmail.jaman.githubclient.model.api.github.profiles.GitHubShortProfile
+import com.smlnskgmail.jaman.githubclient.model.impl.github.githubapi.retrofit.responcses.GitHubShortProfilesResponse
 import java.lang.reflect.Type
 
 class GitHubShortProfilesDeserializer : JsonDeserializer<GitHubShortProfilesResponse> {

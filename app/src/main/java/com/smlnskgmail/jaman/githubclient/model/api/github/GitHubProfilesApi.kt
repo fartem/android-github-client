@@ -1,7 +1,7 @@
-package com.smlnskgmail.jaman.githubclient.model.api
+package com.smlnskgmail.jaman.githubclient.model.api.github
 
-import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubExpandedProfile
-import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubShortProfile
+import com.smlnskgmail.jaman.githubclient.model.api.github.profiles.GitHubExpandedProfile
+import com.smlnskgmail.jaman.githubclient.model.api.github.profiles.GitHubShortProfile
 
 interface GitHubProfilesApi {
 

@@ -13,9 +13,9 @@ import com.smlnskgmail.jaman.githubclient.R
 import com.smlnskgmail.jaman.githubclient.components.AppLongToast
 import com.smlnskgmail.jaman.githubclient.components.BaseFragment
 import com.smlnskgmail.jaman.githubclient.components.recyclerview.ExpandableRecyclerViewPagination
-import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfilesApi
-import com.smlnskgmail.jaman.githubclient.model.api.GitHubRepository
-import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubExpandedProfile
+import com.smlnskgmail.jaman.githubclient.model.api.github.GitHubProfilesApi
+import com.smlnskgmail.jaman.githubclient.model.api.github.GitHubRepository
+import com.smlnskgmail.jaman.githubclient.model.api.github.profiles.GitHubExpandedProfile
 import com.smlnskgmail.jaman.githubclient.presenter.profileinfo.ProfileInfoPresenter
 import com.smlnskgmail.jaman.githubclient.presenter.profileinfo.ProfileInfoPresenterImpl
 import kotlinx.android.synthetic.main.fragment_profile_info.*

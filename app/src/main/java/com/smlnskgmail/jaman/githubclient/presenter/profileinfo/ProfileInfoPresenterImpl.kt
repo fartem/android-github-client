@@ -1,8 +1,8 @@
 package com.smlnskgmail.jaman.githubclient.presenter.profileinfo
 
-import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfilesApi
-import com.smlnskgmail.jaman.githubclient.model.api.GitHubRepository
-import com.smlnskgmail.jaman.githubclient.model.api.profiles.GitHubExpandedProfile
+import com.smlnskgmail.jaman.githubclient.model.api.github.GitHubProfilesApi
+import com.smlnskgmail.jaman.githubclient.model.api.github.GitHubRepository
+import com.smlnskgmail.jaman.githubclient.model.api.github.profiles.GitHubExpandedProfile
 import com.smlnskgmail.jaman.githubclient.view.profileinfo.ProfileInfoView
 
 class ProfileInfoPresenterImpl : ProfileInfoPresenter {

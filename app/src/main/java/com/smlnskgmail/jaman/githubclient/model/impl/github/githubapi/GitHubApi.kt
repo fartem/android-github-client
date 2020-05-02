@@ -1,21 +1,22 @@
-package com.smlnskgmail.jaman.githubclient.model.impl.github
+package com.smlnskgmail.jaman.githubclient.model.impl.github.githubapi
 
 import com.google.gson.GsonBuilder
-import com.smlnskgmail.jaman.githubclient.model.api.GitHubProfilesApi
-import com.smlnskgmail.jaman.githubclient.model.impl.github.deserializers.GitHubExpandedProfileDeserializer
-import com.smlnskgmail.jaman.githubclient.model.impl.github.deserializers.GitHubRepositoriesDeserializer
-import com.smlnskgmail.jaman.githubclient.model.impl.github.deserializers.GitHubShortProfilesDeserializer
-import com.smlnskgmail.jaman.githubclient.model.impl.github.retrofit.GitHubApiService
-import com.smlnskgmail.jaman.githubclient.model.impl.github.retrofit.responcses.GitHubExpandedProfileResponse
-import com.smlnskgmail.jaman.githubclient.model.impl.github.retrofit.responcses.GitHubRepositoriesResponse
-import com.smlnskgmail.jaman.githubclient.model.impl.github.retrofit.responcses.GitHubShortProfilesResponse
+import com.smlnskgmail.jaman.githubclient.model.api.github.GitHubProfilesApi
+import com.smlnskgmail.jaman.githubclient.model.impl.github.githubapi.deserializers.GitHubExpandedProfileDeserializer
+import com.smlnskgmail.jaman.githubclient.model.impl.github.githubapi.deserializers.GitHubRepositoriesDeserializer
+import com.smlnskgmail.jaman.githubclient.model.impl.github.githubapi.deserializers.GitHubShortProfilesDeserializer
+import com.smlnskgmail.jaman.githubclient.model.impl.github.githubapi.retrofit.GitHubApiService
+import com.smlnskgmail.jaman.githubclient.model.impl.github.githubapi.retrofit.responcses.GitHubExpandedProfileResponse
+import com.smlnskgmail.jaman.githubclient.model.impl.github.githubapi.retrofit.responcses.GitHubRepositoriesResponse
+import com.smlnskgmail.jaman.githubclient.model.impl.github.githubapi.retrofit.responcses.GitHubShortProfilesResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class GitHubApi : GitHubProfilesApi {
+class GitHubApi :
+    GitHubProfilesApi {
 
     private var retrofit: Retrofit
 
