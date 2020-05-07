@@ -150,7 +150,7 @@ class RepositoriesListAdapter(
                         Color.parseColor(
                             languageColor
                         ),
-                        PorterDuff.Mode.SRC_IN
+                        PorterDuff.Mode.SRC_ATOP
                     )
                 }
             } else {

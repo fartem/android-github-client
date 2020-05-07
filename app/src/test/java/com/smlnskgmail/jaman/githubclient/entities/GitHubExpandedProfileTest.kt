@@ -3,7 +3,6 @@ package com.smlnskgmail.jaman.githubclient.entities
 import com.smlnskgmail.jaman.githubclient.model.api.github.profiles.GitHubExpandedProfile
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
-import org.junit.Test
 
 class GitHubExpandedProfileTest : BaseEntityTest() {
 

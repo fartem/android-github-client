@@ -17,9 +17,25 @@ class FakeGitHubApi :
     init {
         profiles.add(
             GitHubShortProfile(
-                Integer.MAX_VALUE,
+                -1,
                 "fartem",
                 "User",
+                null
+            )
+        )
+        profiles.add(
+            GitHubShortProfile(
+                -1,
+                "artem385",
+                "User",
+                null
+            )
+        )
+        profiles.add(
+            GitHubShortProfile(
+                -1,
+                "bot385",
+                "Bot",
                 null
             )
         )
@@ -36,21 +52,21 @@ class FakeGitHubApi :
         GitHubRepository(
             "crypto-tracker",
             "Demo application with statistics of some cryptocurrencies",
-            "Kotlin, Java",
+            "Kotlin",
             8,
             1
         ),
         GitHubRepository(
             "android-device-info",
             "Demo app for displaying some information about Android device",
-            "Kotlin, Java",
+            "Kotlin",
             10,
             4
         ),
         GitHubRepository(
             "parse-android-test-app",
             "Demo Android application for Parse test server. Server: https://github.com/fartem/parse-test-server",
-            "Kotlin, Java",
+            "Kotlin",
             13,
             3
         ),
@@ -60,6 +76,20 @@ class FakeGitHubApi :
             "JavaScript",
             4,
             2
+        ),
+        GitHubRepository(
+            "android-remote-temperature-control-client",
+            "Remote client for https://github.com/fartem/arduino-temperature-control",
+            "Kotlin",
+            12,
+            4
+        ),
+        GitHubRepository(
+            "arduino-temperature-control",
+            "Temperature monitoring project. Android app: https://github.com/fartem/android-remote-temperature-control-client",
+            "C++",
+            2,
+            0
         )
     )
 
@@ -72,7 +102,7 @@ class FakeGitHubApi :
     ) {
         profilesLoadCallback.loadSuccess(
             when {
-                page * 30 > profiles.size -> {
+                page == 1 -> {
                     hasUsers = false
                     profiles
                 }
@@ -86,19 +116,46 @@ class FakeGitHubApi :
         login: String,
         expandedProfileLoadCallback: GitHubProfilesApi.ProfileLoadCallback
     ) {
-        if (login == "fartem") {
-            expandedProfileLoadCallback.loadSuccess(
-                GitHubExpandedProfile(
-                    "fartem",
-                    "Artem Fomchenkov",
-                    "",
-                    "Russia, Smolensk",
-                    "jaman.smlnsk@gmail.com",
-                    null
+        when (login) {
+            "fartem" -> {
+                expandedProfileLoadCallback.loadSuccess(
+                    GitHubExpandedProfile(
+                        "fartem",
+                        "Artem Fomchenkov",
+                        "jaman.smlnsk@gmail.com",
+                        "",
+                        "Smolensk, Russia",
+                        null
+                    )
                 )
-            )
-        } else {
-            expandedProfileLoadCallback.loadError()
+            }
+            "artem385" -> {
+                expandedProfileLoadCallback.loadSuccess(
+                    GitHubExpandedProfile(
+                        "artem385",
+                        "Artem",
+                        "artem.fomchenkov@outlook.com",
+                        "",
+                        "Smolensk, Russia",
+                        null
+                    )
+                )
+            }
+            "bot385" -> {
+                expandedProfileLoadCallback.loadSuccess(
+                    GitHubExpandedProfile(
+                        "bot385",
+                        "Bot",
+                        "",
+                        "",
+                        "",
+                        null
+                    )
+                )
+            }
+            else -> {
+                expandedProfileLoadCallback.loadError()
+            }
         }
     }
 
@@ -107,19 +164,32 @@ class FakeGitHubApi :
         page: Int,
         repositoriesLoadCallback: GitHubProfilesApi.RepositoriesLoadCallback
     ) {
-        if (login == "fartem") {
-            repositoriesLoadCallback.loadSuccess(
-                when {
-                    page * 30 > repositories.size -> {
-                        hasRepositories = false
-                        repositories
+        when (login) {
+            "fartem" -> {
+                repositoriesLoadCallback.loadSuccess(
+                    when {
+                        page == 1 -> {
+                            hasRepositories = false
+                            repositories
+                        }
+                        hasRepositories -> repositories
+                        else -> emptyList()
                     }
-                    hasRepositories -> repositories
-                    else -> emptyList()
-                }
-            )
-        } else {
-            repositoriesLoadCallback.loadError()
+                )
+            }
+            "artem385" -> {
+                repositoriesLoadCallback.loadSuccess(
+                    emptyList()
+                )
+            }
+            "bot385" -> {
+                repositoriesLoadCallback.loadSuccess(
+                    emptyList()
+                )
+            }
+            else -> {
+                repositoriesLoadCallback.loadError()
+            }
         }
     }
 
