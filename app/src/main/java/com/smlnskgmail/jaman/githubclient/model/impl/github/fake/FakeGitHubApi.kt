@@ -7,7 +7,8 @@ import com.smlnskgmail.jaman.githubclient.model.api.github.profiles.GitHubShortP
 
 @SuppressWarnings(
     "StringLiteralDuplication",
-    "MagicNumber"
+    "MagicNumber",
+    "MaxLineLength"
 )
 class FakeGitHubApi :
     GitHubProfilesApi {
