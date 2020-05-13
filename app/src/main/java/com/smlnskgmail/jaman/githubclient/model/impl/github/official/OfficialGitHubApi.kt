@@ -1,39 +1,39 @@
-package com.smlnskgmail.jaman.githubclient.model.impl.github.githubapi
+package com.smlnskgmail.jaman.githubclient.model.impl.github.official
 
 import com.google.gson.GsonBuilder
 import com.smlnskgmail.jaman.githubclient.model.api.github.GitHubProfilesApi
-import com.smlnskgmail.jaman.githubclient.model.impl.github.githubapi.deserializers.GitHubExpandedProfileDeserializer
-import com.smlnskgmail.jaman.githubclient.model.impl.github.githubapi.deserializers.GitHubRepositoriesDeserializer
-import com.smlnskgmail.jaman.githubclient.model.impl.github.githubapi.deserializers.GitHubShortProfilesDeserializer
-import com.smlnskgmail.jaman.githubclient.model.impl.github.githubapi.retrofit.GitHubApiService
-import com.smlnskgmail.jaman.githubclient.model.impl.github.githubapi.retrofit.responcses.GitHubExpandedProfileResponse
-import com.smlnskgmail.jaman.githubclient.model.impl.github.githubapi.retrofit.responcses.GitHubRepositoriesResponse
-import com.smlnskgmail.jaman.githubclient.model.impl.github.githubapi.retrofit.responcses.GitHubShortProfilesResponse
+import com.smlnskgmail.jaman.githubclient.model.impl.github.official.deserializers.OfficialGitHubExpandedProfileDeserializer
+import com.smlnskgmail.jaman.githubclient.model.impl.github.official.deserializers.OfficialGitHubRepositoriesDeserializer
+import com.smlnskgmail.jaman.githubclient.model.impl.github.official.deserializers.OfficialGitHubShortProfilesDeserializer
+import com.smlnskgmail.jaman.githubclient.model.impl.github.official.retrofit.OfficialGitHubApiService
+import com.smlnskgmail.jaman.githubclient.model.impl.github.official.retrofit.responcses.OfficialGitHubExpandedProfileResponse
+import com.smlnskgmail.jaman.githubclient.model.impl.github.official.retrofit.responcses.OfficialGitHubRepositoriesResponse
+import com.smlnskgmail.jaman.githubclient.model.impl.github.official.retrofit.responcses.OfficialGitHubShortProfilesResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class GitHubApi :
+class OfficialGitHubApi :
     GitHubProfilesApi {
 
     private var retrofit: Retrofit
 
-    private var gitHubApiService: GitHubApiService
+    private var officialGitHubApiService: OfficialGitHubApiService
 
     private val gson = GsonBuilder()
         .registerTypeAdapter(
-            GitHubShortProfilesResponse::class.java,
-            GitHubShortProfilesDeserializer()
+            OfficialGitHubShortProfilesResponse::class.java,
+            OfficialGitHubShortProfilesDeserializer()
         )
         .registerTypeAdapter(
-            GitHubExpandedProfileResponse::class.java,
-            GitHubExpandedProfileDeserializer()
+            OfficialGitHubExpandedProfileResponse::class.java,
+            OfficialGitHubExpandedProfileDeserializer()
         )
         .registerTypeAdapter(
-            GitHubRepositoriesResponse::class.java,
-            GitHubRepositoriesDeserializer()
+            OfficialGitHubRepositoriesResponse::class.java,
+            OfficialGitHubRepositoriesDeserializer()
         )
         .setLenient()
         .create()
@@ -49,8 +49,8 @@ class GitHubApi :
                 )
             )
             .build()
-        gitHubApiService = retrofit.create(
-            GitHubApiService::class.java
+        officialGitHubApiService = retrofit.create(
+            OfficialGitHubApiService::class.java
         )
     }
 
@@ -61,11 +61,11 @@ class GitHubApi :
         if (page == 1) {
             lastId = 0
         }
-        gitHubApiService.profilesPortion(
+        officialGitHubApiService.profilesPortion(
             lastId
-        ).enqueue(object : Callback<GitHubShortProfilesResponse> {
+        ).enqueue(object : Callback<OfficialGitHubShortProfilesResponse> {
             override fun onFailure(
-                call: Call<GitHubShortProfilesResponse>,
+                call: Call<OfficialGitHubShortProfilesResponse>,
                 t: Throwable
             ) {
                 profilesLoadCallback.loadSuccess(
@@ -74,8 +74,8 @@ class GitHubApi :
             }
 
             override fun onResponse(
-                call: Call<GitHubShortProfilesResponse>,
-                response: Response<GitHubShortProfilesResponse>
+                call: Call<OfficialGitHubShortProfilesResponse>,
+                response: Response<OfficialGitHubShortProfilesResponse>
             ) {
                 if (response.body() != null) {
                     lastId = response.body()!!.shortProfiles.last().id
@@ -93,19 +93,19 @@ class GitHubApi :
         login: String,
         expandedProfileLoadCallback: GitHubProfilesApi.ProfileLoadCallback
     ) {
-        gitHubApiService.profile(
+        officialGitHubApiService.profile(
             login
-        ).enqueue(object : Callback<GitHubExpandedProfileResponse> {
+        ).enqueue(object : Callback<OfficialGitHubExpandedProfileResponse> {
             override fun onFailure(
-                call: Call<GitHubExpandedProfileResponse>,
+                call: Call<OfficialGitHubExpandedProfileResponse>,
                 t: Throwable
             ) {
                 expandedProfileLoadCallback.loadError()
             }
 
             override fun onResponse(
-                call: Call<GitHubExpandedProfileResponse>,
-                response: Response<GitHubExpandedProfileResponse>
+                call: Call<OfficialGitHubExpandedProfileResponse>,
+                response: Response<OfficialGitHubExpandedProfileResponse>
             ) {
                 if (response.body() != null) {
                     expandedProfileLoadCallback.loadSuccess(
@@ -123,20 +123,20 @@ class GitHubApi :
         page: Int,
         repositoriesLoadCallback: GitHubProfilesApi.RepositoriesLoadCallback
     ) {
-        gitHubApiService.repositories(
+        officialGitHubApiService.repositories(
             login,
             page
-        ).enqueue(object : Callback<GitHubRepositoriesResponse> {
+        ).enqueue(object : Callback<OfficialGitHubRepositoriesResponse> {
             override fun onFailure(
-                call: Call<GitHubRepositoriesResponse>,
+                call: Call<OfficialGitHubRepositoriesResponse>,
                 t: Throwable
             ) {
                 repositoriesLoadCallback.loadError()
             }
 
             override fun onResponse(
-                call: Call<GitHubRepositoriesResponse>,
-                response: Response<GitHubRepositoriesResponse>
+                call: Call<OfficialGitHubRepositoriesResponse>,
+                response: Response<OfficialGitHubRepositoriesResponse>
             ) {
                 if (response.body() != null) {
                     repositoriesLoadCallback.loadSuccess(

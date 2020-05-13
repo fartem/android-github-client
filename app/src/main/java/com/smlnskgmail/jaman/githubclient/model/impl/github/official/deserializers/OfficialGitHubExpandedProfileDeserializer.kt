@@ -1,20 +1,20 @@
-package com.smlnskgmail.jaman.githubclient.model.impl.github.githubapi.deserializers
+package com.smlnskgmail.jaman.githubclient.model.impl.github.official.deserializers
 
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.smlnskgmail.jaman.githubclient.model.api.github.profiles.GitHubExpandedProfile
-import com.smlnskgmail.jaman.githubclient.model.impl.github.githubapi.retrofit.responcses.GitHubExpandedProfileResponse
+import com.smlnskgmail.jaman.githubclient.model.impl.github.official.retrofit.responcses.OfficialGitHubExpandedProfileResponse
 import java.lang.reflect.Type
 
-class GitHubExpandedProfileDeserializer : JsonDeserializer<GitHubExpandedProfileResponse> {
+class OfficialGitHubExpandedProfileDeserializer : JsonDeserializer<OfficialGitHubExpandedProfileResponse> {
 
     override fun deserialize(
         json: JsonElement?,
         typeOfT: Type?,
         context: JsonDeserializationContext?
-    ): GitHubExpandedProfileResponse {
+    ): OfficialGitHubExpandedProfileResponse {
         json as JsonObject
 
         val name = json.get("name")
@@ -29,7 +29,7 @@ class GitHubExpandedProfileDeserializer : JsonDeserializer<GitHubExpandedProfile
             if (location.isJsonNull) "" else location.asString,
             json.get("avatar_url").asString
         )
-        return GitHubExpandedProfileResponse(
+        return OfficialGitHubExpandedProfileResponse(
             gitHubExpandedProfile
         )
     }

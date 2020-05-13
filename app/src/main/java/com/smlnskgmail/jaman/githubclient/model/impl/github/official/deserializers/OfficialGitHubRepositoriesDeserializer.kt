@@ -1,17 +1,17 @@
-package com.smlnskgmail.jaman.githubclient.model.impl.github.githubapi.deserializers
+package com.smlnskgmail.jaman.githubclient.model.impl.github.official.deserializers
 
 import com.google.gson.*
 import com.smlnskgmail.jaman.githubclient.model.api.github.GitHubRepository
-import com.smlnskgmail.jaman.githubclient.model.impl.github.githubapi.retrofit.responcses.GitHubRepositoriesResponse
+import com.smlnskgmail.jaman.githubclient.model.impl.github.official.retrofit.responcses.OfficialGitHubRepositoriesResponse
 import java.lang.reflect.Type
 
-class GitHubRepositoriesDeserializer : JsonDeserializer<GitHubRepositoriesResponse> {
+class OfficialGitHubRepositoriesDeserializer : JsonDeserializer<OfficialGitHubRepositoriesResponse> {
 
     override fun deserialize(
         json: JsonElement?,
         typeOfT: Type?,
         context: JsonDeserializationContext?
-    ): GitHubRepositoriesResponse {
+    ): OfficialGitHubRepositoriesResponse {
         val repositories = mutableListOf<GitHubRepository>()
         (json as JsonArray).forEach {
             it as JsonObject
@@ -31,7 +31,7 @@ class GitHubRepositoriesDeserializer : JsonDeserializer<GitHubRepositoriesRespon
                 )
             )
         }
-        return GitHubRepositoriesResponse(
+        return OfficialGitHubRepositoriesResponse(
             repositories
         )
     }

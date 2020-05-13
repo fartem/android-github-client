@@ -1,7 +1,7 @@
-package com.smlnskgmail.jaman.githubclient.model.impl.github.githubapi.retrofit.responcses
+package com.smlnskgmail.jaman.githubclient.model.impl.github.official.retrofit.responcses
 
 import com.smlnskgmail.jaman.githubclient.model.api.github.profiles.GitHubShortProfile
 
-data class GitHubShortProfilesResponse(
+data class OfficialGitHubShortProfilesResponse(
     val shortProfiles: List<GitHubShortProfile>
 )
