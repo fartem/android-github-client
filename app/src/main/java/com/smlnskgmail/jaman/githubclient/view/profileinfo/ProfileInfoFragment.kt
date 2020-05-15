@@ -50,7 +50,7 @@ class ProfileInfoFragment : BaseFragment(), ProfileInfoView, KodeinAware {
         profileInfoPresenter.init(
             gitHubProfilesApi,
             this,
-            arguments!!.getString(
+            requireArguments().getString(
                 profileIdKey,
             null
             )
@@ -87,7 +87,7 @@ class ProfileInfoFragment : BaseFragment(), ProfileInfoView, KodeinAware {
                 optimalImageSize
             )
 
-            Glide.with(context!!)
+            Glide.with(requireContext())
                 .asBitmap()
                 .apply(requestOptions)
                 .load(expandedProfile.photoUrl)
@@ -158,9 +158,17 @@ class ProfileInfoFragment : BaseFragment(), ProfileInfoView, KodeinAware {
             (repositories_list.adapter as RepositoriesListAdapter).loadingEnded()
         }
         AppLongToast(
-            context!!,
+            requireContext(),
             getString(R.string.message_load_error)
         ).show()
+    }
+
+    override fun title(): String {
+        return getString(R.string.title_profile_info)
+    }
+
+    override fun enableBackPress(): Boolean {
+        return true
     }
 
     override fun layoutResId(): Int {

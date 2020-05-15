@@ -20,6 +20,10 @@ abstract class BaseFragment : Fragment() {
         )
     }
 
+    abstract fun title(): String
+
+    abstract fun enableBackPress(): Boolean
+
     abstract fun layoutResId(): Int
 
 }

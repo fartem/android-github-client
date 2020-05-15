@@ -101,7 +101,7 @@ class ProfilesListFragment : BaseFragment(),
             (profiles_list.adapter as ProfilesListAdapter).loadingEnded()
         }
         AppLongToast(
-            context!!,
+            requireContext(),
             getString(R.string.message_load_error)
         ).show()
     }
@@ -112,6 +112,14 @@ class ProfilesListFragment : BaseFragment(),
         (activity as AppNavigator).showProfileInfoFor(
             gitHubProfile.login
         )
+    }
+
+    override fun title(): String {
+        return getString(R.string.title_profiles_list)
+    }
+
+    override fun enableBackPress(): Boolean {
+        return false
     }
 
     override fun layoutResId(): Int {
