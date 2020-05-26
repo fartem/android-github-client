@@ -58,6 +58,7 @@ class MainActivity : BaseActivity(), AppNavigator {
         super.onCreate(savedInstanceState)
         setSupportActionBar(main_toolbar)
         showFragment(ProfilesListFragment())
+        main_menu_header_version.text = BuildConfig.VERSION_NAME
     }
 
     override fun onStart() {

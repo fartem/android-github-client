@@ -31,8 +31,42 @@
         android:id="@+id/main_menu"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/view_drawer_header" />
+        android:layout_gravity="start">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@color/colorPrimary">
+
+                <ImageView
+                    android:layout_width="@dimen/image_size_profile_in_list"
+                    android:layout_height="@dimen/image_size_profile_in_list"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_github" />
+
+                <TextView
+                    android:id="@+id/main_menu_header_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/common_padding_half"
+                    android:layout_gravity="bottom|end"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_medium"
+                    tools:text="1.0.0" />
+
+            </FrameLayout>
+
+            <androidx.appcompat.widget.SearchView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>
