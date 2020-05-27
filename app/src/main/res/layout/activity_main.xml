@@ -40,14 +40,8 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="@dimen/item_height_drawer_menu"
                 android:background="@color/colorPrimary">
-
-                <ImageView
-                    android:layout_width="@dimen/image_size_profile_in_list"
-                    android:layout_height="@dimen/image_size_profile_in_list"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_github" />
 
                 <TextView
                     android:id="@+id/main_menu_header_version"
@@ -61,9 +55,26 @@
 
             </FrameLayout>
 
-            <androidx.appcompat.widget.SearchView
+            <EditText
+                android:id="@+id/main_menu_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.smlnskgmail.jaman.adaptiverecyclerview.AdaptiveRecyclerView
+                    android:id="@+id/main_menu_search_results"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <com.smlnskgmail.jaman.adaptiverecyclerview.AdaptiveMessageView
+                    android:id="@+id/main_menu_search_results_error"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </FrameLayout>
 
         </LinearLayout>
 

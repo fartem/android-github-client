@@ -6,7 +6,9 @@
     <dimen name="common_padding">16dp</dimen>
     <dimen name="common_padding_half">8dp</dimen>
 
-    <dimen name="item_load_height">48dp</dimen>
+    <dimen name="item_height_drawer_menu">130dp</dimen>
+
+    <dimen name="item_height_load_indicator">48dp</dimen>
 
     <dimen name="image_size_profile_in_list">48dp</dimen>
     <dimen name="image_size_profile_info">54dp</dimen>

@@ -58,7 +58,12 @@ class MainActivity : BaseActivity(), AppNavigator {
         super.onCreate(savedInstanceState)
         setSupportActionBar(main_toolbar)
         showFragment(ProfilesListFragment())
+        initDrawerMenu()
+    }
+
+    private fun initDrawerMenu() {
         main_menu_header_version.text = BuildConfig.VERSION_NAME
+        main_menu_search.
     }
 
     override fun onStart() {

@@ -65,7 +65,7 @@
 
     <style name="AppProgressBarItemLoad">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/item_load_height</item>
+        <item name="android:layout_height">@dimen/item_height_load_indicator</item>
         <item name="android:padding">@dimen/common_padding_half</item>
     </style>
 </resources>
