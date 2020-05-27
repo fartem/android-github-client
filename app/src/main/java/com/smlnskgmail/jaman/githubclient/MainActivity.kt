@@ -63,7 +63,6 @@ class MainActivity : BaseActivity(), AppNavigator {
 
     private fun initDrawerMenu() {
         main_menu_header_version.text = BuildConfig.VERSION_NAME
-        main_menu_search.
     }
 
     override fun onStart() {
