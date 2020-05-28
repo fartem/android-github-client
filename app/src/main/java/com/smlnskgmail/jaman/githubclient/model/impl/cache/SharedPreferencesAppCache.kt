@@ -3,6 +3,7 @@ package com.smlnskgmail.jaman.githubclient.model.impl.cache
 import android.content.Context
 import androidx.preference.PreferenceManager
 import com.smlnskgmail.jaman.githubclient.model.api.cache.AppCache
+import com.smlnskgmail.jaman.githubclient.model.api.cache.AppCacheParameterTarget
 
 class SharedPreferencesAppCache(
     context: Context
@@ -37,6 +38,8 @@ class SharedPreferencesAppCache(
     )
 
     private val showedProfilesIds = mutableListOf<String>()
+
+    private val showedProfilesTargets = mutableListOf<AppCacheParameterTarget>()
 
     init {
         sharedPreferences.getString(
@@ -97,6 +100,22 @@ class SharedPreferencesAppCache(
 
     override fun showedUsersIds(): List<String> {
         return showedProfilesIds.reversed()
+    }
+
+    override fun addShowedUsersUpdateTarget(
+        appCacheParameterTarget: AppCacheParameterTarget
+    ) {
+        showedProfilesTargets.add(
+            appCacheParameterTarget
+        )
+    }
+
+    override fun removeShowedUsersUpdateTarget(
+        appCacheParameterTarget: AppCacheParameterTarget
+    ) {
+        showedProfilesTargets.remove(
+            appCacheParameterTarget
+        )
     }
 
 }

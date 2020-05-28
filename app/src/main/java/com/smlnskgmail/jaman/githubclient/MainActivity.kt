@@ -9,11 +9,25 @@ import androidx.fragment.app.FragmentManager
 import com.smlnskgmail.jaman.githubclient.components.AppNavigator
 import com.smlnskgmail.jaman.githubclient.components.BaseActivity
 import com.smlnskgmail.jaman.githubclient.components.BaseFragment
+import com.smlnskgmail.jaman.githubclient.model.api.cache.AppCache
+import com.smlnskgmail.jaman.githubclient.model.api.cache.AppCacheParameterTarget
 import com.smlnskgmail.jaman.githubclient.view.profileinfo.ProfileInfoFragment
 import com.smlnskgmail.jaman.githubclient.view.profileslist.ProfilesListFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.generic.instance
 
-class MainActivity : BaseActivity(), AppNavigator {
+class MainActivity : BaseActivity(), AppNavigator, KodeinAware {
+
+    override lateinit var kodein: Kodein
+
+    private val appCache: AppCache by instance<AppCache>()
+    private val showedUsersUpdateTarget = object : AppCacheParameterTarget {
+        override fun updated() {
+
+        }
+    }
 
     private lateinit var toggle: ActionBarDrawerToggle
 
@@ -57,17 +71,22 @@ class MainActivity : BaseActivity(), AppNavigator {
     ) {
         super.onCreate(savedInstanceState)
         setSupportActionBar(main_toolbar)
+        kodein = (applicationContext as App).kodein
         showFragment(ProfilesListFragment())
         initDrawerMenu()
     }
 
     private fun initDrawerMenu() {
         main_menu_header_version.text = BuildConfig.VERSION_NAME
+
     }
 
     override fun onStart() {
         supportFragmentManager.addOnBackStackChangedListener(
             fragmentsBackStackListener
+        )
+        appCache.addShowedUsersUpdateTarget(
+            showedUsersUpdateTarget
         )
         super.onStart()
     }
@@ -101,6 +120,9 @@ class MainActivity : BaseActivity(), AppNavigator {
     override fun onStop() {
         supportFragmentManager.removeOnBackStackChangedListener(
             fragmentsBackStackListener
+        )
+        appCache.removeShowedUsersUpdateTarget(
+            showedUsersUpdateTarget
         )
         super.onStop()
     }

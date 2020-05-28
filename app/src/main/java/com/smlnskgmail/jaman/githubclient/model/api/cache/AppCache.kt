@@ -14,4 +14,11 @@ interface AppCache {
 
     fun showedUsersIds(): List<String>
 
+    fun addShowedUsersUpdateTarget(
+        appCacheParameterTarget: AppCacheParameterTarget
+    )
+    fun removeShowedUsersUpdateTarget(
+        appCacheParameterTarget: AppCacheParameterTarget
+    )
+
 }
