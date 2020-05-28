@@ -57,6 +57,9 @@ dependencies {
     // Kodein
     implementation 'org.kodein.di:kodein-di-generic-jvm:6.5.5'
 
+    // Hawk
+    implementation "com.orhanobut:hawk:2.0.1"
+
     // Retrofit
     // noinspection GradleDependency
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'

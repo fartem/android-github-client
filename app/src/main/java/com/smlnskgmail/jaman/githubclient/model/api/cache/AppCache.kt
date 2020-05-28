@@ -1,5 +1,7 @@
 package com.smlnskgmail.jaman.githubclient.model.api.cache
 
+import com.smlnskgmail.jaman.githubclient.model.api.github.profiles.GitHubShortProfile
+
 interface AppCache {
 
     companion object {
@@ -8,11 +10,11 @@ interface AppCache {
 
     }
 
-    fun saveShowedUserId(
-        profileId: String
+    fun saveShowedUser(
+        gitHubShortProfile: GitHubShortProfile
     )
 
-    fun showedUsersIds(): List<String>
+    fun showedUsers(): List<GitHubShortProfile>
 
     fun addShowedUsersUpdateTarget(
         appCacheParameterTarget: AppCacheParameterTarget

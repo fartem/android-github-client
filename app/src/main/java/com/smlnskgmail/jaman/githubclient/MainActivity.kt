@@ -6,6 +6,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.smlnskgmail.jaman.adaptiverecyclerview.BuildConfig
 import com.smlnskgmail.jaman.githubclient.components.AppNavigator
 import com.smlnskgmail.jaman.githubclient.components.BaseActivity
 import com.smlnskgmail.jaman.githubclient.components.BaseFragment
@@ -32,7 +33,10 @@ class MainActivity : BaseActivity(), AppNavigator, KodeinAware {
     private lateinit var toggle: ActionBarDrawerToggle
 
     private val fragmentsBackStackListener = FragmentManager.OnBackStackChangedListener {
-        val currentFragment = supportFragmentManager.fragments.lastOrNull()
+        var currentFragment = supportFragmentManager.fragments.lastOrNull()
+        if (currentFragment !is BaseFragment) {
+            currentFragment = supportFragmentManager.fragments.firstOrNull()
+        }
         if (currentFragment is BaseFragment) {
             Handler().post {
                 main_toolbar.title = currentFragment.title()
@@ -78,7 +82,6 @@ class MainActivity : BaseActivity(), AppNavigator, KodeinAware {
 
     private fun initDrawerMenu() {
         main_menu_header_version.text = BuildConfig.VERSION_NAME
-
     }
 
     override fun onStart() {

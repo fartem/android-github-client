@@ -3,7 +3,7 @@ package com.smlnskgmail.jaman.githubclient
 import android.app.Application
 import com.smlnskgmail.jaman.githubclient.model.api.cache.AppCache
 import com.smlnskgmail.jaman.githubclient.model.api.github.GitHubProfilesApi
-import com.smlnskgmail.jaman.githubclient.model.impl.cache.SharedPreferencesAppCache
+import com.smlnskgmail.jaman.githubclient.model.impl.cache.HawkAppCache
 import com.smlnskgmail.jaman.githubclient.model.impl.github.fake.FakeGitHubApi
 import com.smlnskgmail.jaman.githubclient.model.impl.github.official.OfficialGitHubApi
 import org.kodein.di.Kodein
@@ -24,7 +24,7 @@ class App : Application(), KodeinAware {
             }
         }
         bind<AppCache>() with singleton {
-            SharedPreferencesAppCache(
+            HawkAppCache(
                 this@App
             )
         }

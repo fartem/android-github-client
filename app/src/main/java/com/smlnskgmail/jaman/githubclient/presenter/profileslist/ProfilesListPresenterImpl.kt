@@ -75,8 +75,8 @@ class ProfilesListPresenterImpl : ProfilesListPresenter {
     override fun profileSelect(
         gitHubProfile: GitHubShortProfile
     ) {
-        appCache.saveShowedUserId(
-            gitHubProfile.login
+        appCache.saveShowedUser(
+            gitHubProfile
         )
         profilesListView.showProfileInfo(
             gitHubProfile
