@@ -1,4 +1,4 @@
-package com.smlnskgmail.jaman.githubclient
+package com.smlnskgmail.jaman.githubclient.main
 
 import android.os.Bundle
 import android.os.Handler
@@ -6,10 +6,14 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.smlnskgmail.jaman.adaptiverecyclerview.BuildConfig
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.smlnskgmail.jaman.githubclient.App
+import com.smlnskgmail.jaman.githubclient.BuildConfig
+import com.smlnskgmail.jaman.githubclient.R
 import com.smlnskgmail.jaman.githubclient.components.AppNavigator
 import com.smlnskgmail.jaman.githubclient.components.BaseActivity
 import com.smlnskgmail.jaman.githubclient.components.BaseFragment
+import com.smlnskgmail.jaman.githubclient.main.header.HeaderProfilesAdapter
 import com.smlnskgmail.jaman.githubclient.model.api.cache.AppCache
 import com.smlnskgmail.jaman.githubclient.model.api.cache.AppCacheParameterTarget
 import com.smlnskgmail.jaman.githubclient.view.profileinfo.ProfileInfoFragment
@@ -26,7 +30,9 @@ class MainActivity : BaseActivity(), AppNavigator, KodeinAware {
     private val appCache: AppCache by instance<AppCache>()
     private val showedUsersUpdateTarget = object : AppCacheParameterTarget {
         override fun updated() {
-
+            (main_menu_search_results.adapter as HeaderProfilesAdapter).updateProfiles(
+                appCache.showedUsers()
+            )
         }
     }
 
@@ -82,6 +88,11 @@ class MainActivity : BaseActivity(), AppNavigator, KodeinAware {
 
     private fun initDrawerMenu() {
         main_menu_header_version.text = BuildConfig.VERSION_NAME
+        main_menu_search_results.messageView = main_menu_search_results_error
+        main_menu_search_results.layoutManager = LinearLayoutManager(this)
+        main_menu_search_results.adapter = HeaderProfilesAdapter(
+            appCache.showedUsers()
+        )
     }
 
     override fun onStart() {

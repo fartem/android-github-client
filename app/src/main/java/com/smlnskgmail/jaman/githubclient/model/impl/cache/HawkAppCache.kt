@@ -88,6 +88,9 @@ class HawkAppCache(
                 gitHubShortProfile
             )
         )
+        showedProfilesTargets.forEach {
+            it.updated()
+        }
     }
 
     override fun showedUsers(): List<GitHubShortProfile> {
