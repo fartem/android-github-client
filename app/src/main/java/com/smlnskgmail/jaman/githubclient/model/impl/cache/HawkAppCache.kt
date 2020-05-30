@@ -20,45 +20,45 @@ class HawkAppCache(
         if (Hawk.contains("0")) {
             Hawk.get<String>("0").let {
                 showedProfiles.add(
-                    GitHubShortProfileParser.fromJson(
+                    GitHubShortProfileParser(
                         it
-                    )
+                    ).fromJsonString()
                 )
             }
         }
         if (Hawk.contains("1")) {
             Hawk.get<String>("1").let {
                 showedProfiles.add(
-                    GitHubShortProfileParser.fromJson(
+                    GitHubShortProfileParser(
                         it
-                    )
+                    ).fromJsonString()
                 )
             }
         }
         if (Hawk.contains("2")) {
             Hawk.get<String>("2").let {
                 showedProfiles.add(
-                    GitHubShortProfileParser.fromJson(
+                    GitHubShortProfileParser(
                         it
-                    )
+                    ).fromJsonString()
                 )
             }
         }
         if (Hawk.contains("3")) {
             Hawk.get<String>("3").let {
                 showedProfiles.add(
-                    GitHubShortProfileParser.fromJson(
+                    GitHubShortProfileParser(
                         it
-                    )
+                    ).fromJsonString()
                 )
             }
         }
         if (Hawk.contains("4")) {
             Hawk.get<String>("4").let {
                 showedProfiles.add(
-                    GitHubShortProfileParser.fromJson(
+                    GitHubShortProfileParser(
                         it
-                    )
+                    ).fromJsonString()
                 )
             }
         }
@@ -73,9 +73,9 @@ class HawkAppCache(
             showedProfiles.forEachIndexed { index, profile ->
                 Hawk.put(
                     index.toString(),
-                    GitHubShortProfileParser.toJson(
+                    GitHubShortProfileWrapper(
                         profile
-                    )
+                    ).toJsonString()
                 )
             }
         }
@@ -84,9 +84,9 @@ class HawkAppCache(
         )
         Hawk.put(
             showedProfiles.size.minus(1).toString(),
-            GitHubShortProfileParser.toJson(
+            GitHubShortProfileWrapper(
                 gitHubShortProfile
-            )
+            ).toJsonString()
         )
         showedProfilesTargets.forEach {
             it.updated()
