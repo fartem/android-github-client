@@ -9,7 +9,6 @@ import com.smlnskgmail.jaman.githubclient.components.AppLongToast
 import com.smlnskgmail.jaman.githubclient.components.AppNavigator
 import com.smlnskgmail.jaman.githubclient.components.BaseFragment
 import com.smlnskgmail.jaman.githubclient.components.recyclerview.ExpandableRecyclerViewPagination
-import com.smlnskgmail.jaman.githubclient.model.api.cache.AppCache
 import com.smlnskgmail.jaman.githubclient.model.api.github.GitHubProfilesApi
 import com.smlnskgmail.jaman.githubclient.model.api.github.profiles.GitHubShortProfile
 import com.smlnskgmail.jaman.githubclient.presenter.profileslist.ProfilesListPresenter
@@ -27,7 +26,6 @@ class ProfilesListFragment : BaseFragment(),
     override lateinit var kodein: Kodein
 
     private val gitHubProfilesApi: GitHubProfilesApi by instance<GitHubProfilesApi>()
-    private val appCache: AppCache by instance<AppCache>()
 
     private lateinit var profilesListPresenter: ProfilesListPresenter
 
