@@ -20,7 +20,9 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.generic.instance
 
 class ProfilesListFragment : BaseFragment(),
-    ProfilesListView, KodeinAware, ProfilesListAdapter.ProfileSelectTarget {
+    ProfilesListView,
+    KodeinAware,
+    ProfilesListAdapter.ProfileSelectTarget {
 
     override lateinit var kodein: Kodein
 
@@ -59,20 +61,22 @@ class ProfilesListFragment : BaseFragment(),
 
         val layoutManager = LinearLayoutManager(context)
         profiles_list.layoutManager = layoutManager
-        profiles_list.addOnScrollListener(object : ExpandableRecyclerViewPagination(layoutManager) {
-            override fun loadMoreItems() {
-                adapter.loadingStarted()
-                profilesListPresenter.loadMoreProfiles()
-            }
+        profiles_list.addOnScrollListener(
+            object : ExpandableRecyclerViewPagination(layoutManager) {
+                override fun loadMoreItems() {
+                    adapter.loadingStarted()
+                    profilesListPresenter.loadMoreProfiles()
+                }
 
-            override fun isLastPage(): Boolean {
-                return profilesListPresenter.profilesLoading()
-            }
+                override fun isLastPage(): Boolean {
+                    return profilesListPresenter.profilesLoading()
+                }
 
-            override fun isLoading(): Boolean {
-                return profilesListPresenter.isLastPage()
+                override fun isLoading(): Boolean {
+                    return profilesListPresenter.isLastPage()
+                }
             }
-        })
+        )
         profiles_list.messageView = profiles_list_message_view
         profiles_list.adapter = adapter
 

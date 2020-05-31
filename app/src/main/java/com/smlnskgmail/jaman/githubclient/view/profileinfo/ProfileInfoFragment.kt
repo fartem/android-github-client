@@ -103,54 +103,58 @@ class ProfileInfoFragment : BaseFragment(), ProfileInfoView, KodeinAware {
     override fun showRepositories(
         gitHubRepositories: List<GitHubRepository>
     ) {
-        repositories_progress_bar.visibility = View.GONE
-        repositories_list.visibility = View.VISIBLE
+        if (isAdded) {
+            repositories_progress_bar.visibility = View.GONE
+            repositories_list.visibility = View.VISIBLE
 
-        val bufferedReader = BufferedReader(
-            InputStreamReader(
-                resources.openRawResource(
-                    R.raw.languages
+            val bufferedReader = BufferedReader(
+                InputStreamReader(
+                    resources.openRawResource(
+                        R.raw.languages
+                    )
                 )
             )
-        )
-        val languages = JsonParser().parse(
-            bufferedReader
-        ).asJsonObject
-        val adapter = RepositoriesListAdapter(
-            gitHubRepositories,
-            languages
-        )
-        repositories_list.adapter = adapter
+            val languages = JsonParser().parse(
+                bufferedReader
+            ).asJsonObject
+            val adapter = RepositoriesListAdapter(
+                gitHubRepositories,
+                languages
+            )
+            repositories_list.adapter = adapter
 
-        val layoutManager = LinearLayoutManager(context)
-        repositories_list.layoutManager = layoutManager
-        repositories_list.addOnScrollListener(
-            object : ExpandableRecyclerViewPagination(
-                layoutManager
-            ) {
-                override fun loadMoreItems() {
-                    adapter.loadingStarted()
-                    profileInfoPresenter.loadMoreRepositories()
-                }
+            val layoutManager = LinearLayoutManager(context)
+            repositories_list.layoutManager = layoutManager
+            repositories_list.addOnScrollListener(
+                object : ExpandableRecyclerViewPagination(
+                    layoutManager
+                ) {
+                    override fun loadMoreItems() {
+                        adapter.loadingStarted()
+                        profileInfoPresenter.loadMoreRepositories()
+                    }
 
-                override fun isLastPage(): Boolean {
-                    return profileInfoPresenter.isLastPage()
-                }
+                    override fun isLastPage(): Boolean {
+                        return profileInfoPresenter.isLastPage()
+                    }
 
-                override fun isLoading(): Boolean {
-                    return profileInfoPresenter.repositoriesLoading()
+                    override fun isLoading(): Boolean {
+                        return profileInfoPresenter.repositoriesLoading()
+                    }
                 }
-            }
-        )
+            )
+        }
     }
 
     override fun addToRepositoriesList(
         gitHubRepositories: List<GitHubRepository>
     ) {
-        (repositories_list.adapter as RepositoriesListAdapter).loadingEnded()
-        (repositories_list.adapter as RepositoriesListAdapter).addMore(
-            gitHubRepositories
-        )
+        if (isAdded) {
+            (repositories_list.adapter as RepositoriesListAdapter).loadingEnded()
+            (repositories_list.adapter as RepositoriesListAdapter).addMore(
+                gitHubRepositories
+            )
+        }
     }
 
     override fun showLoadError() {

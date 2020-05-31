@@ -16,6 +16,7 @@ import com.smlnskgmail.jaman.githubclient.components.BaseFragment
 import com.smlnskgmail.jaman.githubclient.main.header.HeaderProfilesAdapter
 import com.smlnskgmail.jaman.githubclient.model.api.cache.AppCache
 import com.smlnskgmail.jaman.githubclient.model.api.cache.AppCacheParameterTarget
+import com.smlnskgmail.jaman.githubclient.model.api.github.profiles.GitHubShortProfile
 import com.smlnskgmail.jaman.githubclient.view.profileinfo.ProfileInfoFragment
 import com.smlnskgmail.jaman.githubclient.view.profileslist.ProfilesListFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -23,7 +24,10 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.instance
 
-class MainActivity : BaseActivity(), AppNavigator, KodeinAware {
+class MainActivity : BaseActivity(),
+    AppNavigator,
+    KodeinAware,
+    HeaderProfilesAdapter.ProfileSelectTarget {
 
     override lateinit var kodein: Kodein
 
@@ -91,7 +95,16 @@ class MainActivity : BaseActivity(), AppNavigator, KodeinAware {
         main_menu_search_results.messageView = main_menu_search_results_error
         main_menu_search_results.layoutManager = LinearLayoutManager(this)
         main_menu_search_results.adapter = HeaderProfilesAdapter(
-            appCache.showedUsers()
+            appCache.showedUsers(),
+            this
+        )
+    }
+
+    override fun profileSelected(
+        gitHubProfile: GitHubShortProfile
+    ) {
+        showProfileInfoFor(
+            gitHubProfile.login
         )
     }
 
