@@ -8,7 +8,6 @@ import com.smlnskgmail.jaman.githubclient.view.profileslist.ProfilesListView
 class ProfilesListPresenterImpl : ProfilesListPresenter {
 
     private lateinit var gitHubProfilesApi: GitHubProfilesApi
-    private lateinit var appCache: AppCache
     private lateinit var profilesListView: ProfilesListView
 
     private var page: Int = 0
@@ -18,11 +17,9 @@ class ProfilesListPresenterImpl : ProfilesListPresenter {
 
     override fun init(
         gitHubProfilesApi: GitHubProfilesApi,
-        appCache: AppCache,
         profilesListView: ProfilesListView
     ) {
         this.gitHubProfilesApi = gitHubProfilesApi
-        this.appCache = appCache
         this.profilesListView = profilesListView
         loadMoreProfiles()
     }
@@ -75,9 +72,6 @@ class ProfilesListPresenterImpl : ProfilesListPresenter {
     override fun profileSelect(
         gitHubProfile: GitHubShortProfile
     ) {
-        appCache.saveShowedUser(
-            gitHubProfile
-        )
         profilesListView.showProfileInfo(
             gitHubProfile
         )

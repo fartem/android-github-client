@@ -104,7 +104,7 @@ class MainActivity : BaseActivity(),
         gitHubProfile: GitHubShortProfile
     ) {
         showProfileInfoFor(
-            gitHubProfile.login
+            gitHubProfile
         )
     }
 
@@ -132,13 +132,16 @@ class MainActivity : BaseActivity(),
     }
 
     override fun showProfileInfoFor(
-        profileId: String
+        gitHubProfile: GitHubShortProfile
     ) {
+        appCache.saveShowedUser(
+            gitHubProfile
+        )
         val fragment = ProfileInfoFragment()
         val args = Bundle()
         args.putString(
             ProfileInfoFragment.profileIdKey,
-            profileId
+            gitHubProfile.login
         )
         fragment.arguments = args
         showFragment(fragment)

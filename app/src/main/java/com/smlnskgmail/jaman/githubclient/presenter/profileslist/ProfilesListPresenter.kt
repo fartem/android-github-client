@@ -9,7 +9,6 @@ interface ProfilesListPresenter {
 
     fun init(
         gitHubProfilesApi: GitHubProfilesApi,
-        appCache: AppCache,
         profilesListView: ProfilesListView
     )
 

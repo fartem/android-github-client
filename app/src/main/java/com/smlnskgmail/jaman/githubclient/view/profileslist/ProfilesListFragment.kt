@@ -44,7 +44,6 @@ class ProfilesListFragment : BaseFragment(),
         profilesListPresenter = ProfilesListPresenterImpl()
         profilesListPresenter.init(
             gitHubProfilesApi,
-            appCache,
             this
         )
 
@@ -114,7 +113,7 @@ class ProfilesListFragment : BaseFragment(),
         gitHubProfile: GitHubShortProfile
     ) {
         (activity as AppNavigator).showProfileInfoFor(
-            gitHubProfile.login
+            gitHubProfile
         )
     }
 
