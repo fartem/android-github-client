@@ -7,23 +7,32 @@ class GitHubShortProfileWrapper(
     private val gitHubShortProfile: GitHubShortProfile
 ) {
 
+    companion object {
+
+        private const val idKey = "key"
+        private const val loginKey = "login"
+        private const val typeKey = "type"
+        private const val photoUrlKey = "photoUrl"
+
+    }
+
     fun toJsonString(): String {
         val gitHubShortProfileJson = JsonObject()
         gitHubShortProfileJson.addProperty(
-            "id",
+            idKey,
             gitHubShortProfile.id
         )
         gitHubShortProfileJson.addProperty(
-            "login",
+            loginKey,
             gitHubShortProfile.login
         )
         gitHubShortProfileJson.addProperty(
-            "type",
+            typeKey,
             gitHubShortProfile.type
         )
         if (gitHubShortProfile.photoUrl != null) {
             gitHubShortProfileJson.addProperty(
-                "photoUrl",
+                photoUrlKey,
                 gitHubShortProfile.photoUrl
             )
         }
