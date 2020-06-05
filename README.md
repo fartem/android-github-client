@@ -1,5 +1,3 @@
-<img src="media/logo/ic_app.png" height="100px" />
-
 Android GitHub Client
 =============
 
