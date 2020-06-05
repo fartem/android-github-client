@@ -22,16 +22,17 @@
 
         <FrameLayout style="@style/AppContainer">
 
+            <com.smlnskgmail.jaman.adaptiverecyclerview.AdaptiveRecyclerView
+                android:id="@+id/profiles_list"
+                style="@style/AppRecyclerView"
+                arv:message_text="@string/message_profiles_list_empty" />
+
             <com.smlnskgmail.jaman.adaptiverecyclerview.AdaptiveMessageView
                 android:id="@+id/profiles_list_message_view"
                 style="@style/AppContainer"
                 android:visibility="gone"
                 arv:message_text="@string/message_profiles_list_empty"
                 arv:message_text_at_center="true" />
-
-            <com.smlnskgmail.jaman.adaptiverecyclerview.AdaptiveRecyclerView
-                android:id="@+id/profiles_list"
-                style="@style/AppRecyclerView" />
 
         </FrameLayout>
 

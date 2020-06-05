@@ -65,14 +65,16 @@ class ProfilesListAdapter(
     }
 
     fun loadingEnded() {
-        loaderIsVisible = false
-        val progressItemIndex = itemCount - 1
-        notifyItemRemoved(
-            progressItemIndex
-        )
-        shortProfiles.removeAt(
-            progressItemIndex
-        )
+        if (itemCount != 0) {
+            loaderIsVisible = false
+            val progressItemIndex = itemCount - 1
+            notifyItemRemoved(
+                progressItemIndex
+            )
+            shortProfiles.removeAt(
+                progressItemIndex
+            )
+        }
     }
 
     override fun onCreateViewHolder(

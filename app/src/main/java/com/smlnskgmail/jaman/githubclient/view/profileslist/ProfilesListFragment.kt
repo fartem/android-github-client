@@ -44,6 +44,7 @@ class ProfilesListFragment : BaseFragment(),
             gitHubProfilesApi,
             this
         )
+        profiles_list.messageView = profiles_list_message_view
 
         profiles_list_refresh.isEnabled = false
     }
@@ -74,12 +75,18 @@ class ProfilesListFragment : BaseFragment(),
                 }
             }
         )
-        profiles_list.messageView = profiles_list_message_view
         profiles_list.adapter = adapter
 
+        hideLoadProgress()
+        enableRefresh()
+    }
+
+    private fun hideLoadProgress() {
         profiles_list_progress_bar_top.visibility = View.GONE
         profiles_list_progress_bar_center.visibility = View.GONE
+    }
 
+    private fun enableRefresh() {
         profiles_list_refresh.isRefreshing = false
         profiles_list_refresh.isEnabled = true
         profiles_list_refresh.setOnRefreshListener {
@@ -100,11 +107,19 @@ class ProfilesListFragment : BaseFragment(),
     override fun showLoadError() {
         if (profiles_list.adapter != null) {
             (profiles_list.adapter as ProfilesListAdapter).loadingEnded()
+        } else {
+            profiles_list.adapter = ProfilesListAdapter(
+                emptyList(),
+                this
+            )
         }
         AppLongToast(
             requireContext(),
             getString(R.string.message_load_error)
         ).show()
+
+        hideLoadProgress()
+        enableRefresh()
     }
 
     override fun showProfileInfo(

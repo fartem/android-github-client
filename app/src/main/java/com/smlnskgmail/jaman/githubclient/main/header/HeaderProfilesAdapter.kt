@@ -1,5 +1,6 @@
 package com.smlnskgmail.jaman.githubclient.main.header
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -68,6 +69,7 @@ class HeaderProfilesAdapter(
         itemView: View
     ) : RecyclerView.ViewHolder(itemView) {
 
+        @SuppressLint("CheckResult")
         fun bind(item: GitHubShortProfile) {
             itemView.profile_login.text = item.login
             itemView.profile_type.text = item.type
