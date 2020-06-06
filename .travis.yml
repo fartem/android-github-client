@@ -21,6 +21,7 @@ before_install:
 
 script:
   - ./gradlew clean
+  - ./gradlew build
   - ./gradlew jacocoTestGithubImplDebugUnitTestReport
 
 after_success:
