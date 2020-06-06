@@ -14,18 +14,11 @@ android {
         versionCode 1
         versionName '1.0.0'
 
-        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
-
         buildConfigField 'String', 'API_IMPL', "\"\""
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
-    }
-    buildTypes {
-        debug {
-            testCoverageEnabled = true
-        }
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
@@ -45,6 +38,15 @@ android {
             flavorDimensions 'build'
 
             buildConfigField 'String', 'API_IMPL', "\"FAKE\""
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def versionName = android.defaultConfig.versionName
+            def productFlavorName = variant.flavorName
+            def buildTypeName = variant.buildType.name
+            output.outputFileName = "android-github-client-${productFlavorName}-${buildTypeName}_${versionName}.apk"
         }
     }
 }
@@ -75,8 +77,4 @@ dependencies {
 
     // Unit tests
     testImplementation 'junit:junit:4.13'
-
-    // Android Tests
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
