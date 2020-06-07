@@ -13,11 +13,11 @@ import com.smlnskgmail.jaman.githubclient.R
 import com.smlnskgmail.jaman.githubclient.components.AppNavigator
 import com.smlnskgmail.jaman.githubclient.components.BaseActivity
 import com.smlnskgmail.jaman.githubclient.components.BaseFragment
-import com.smlnskgmail.jaman.githubclient.main.header.HeaderProfilesAdapter
 import com.smlnskgmail.jaman.githubclient.model.api.cache.AppCache
 import com.smlnskgmail.jaman.githubclient.model.api.cache.AppCacheParameterTarget
 import com.smlnskgmail.jaman.githubclient.model.api.github.profiles.GitHubShortProfile
 import com.smlnskgmail.jaman.githubclient.view.profileinfo.ProfileInfoFragment
+import com.smlnskgmail.jaman.githubclient.view.profileslist.ProfilesListAdapter
 import com.smlnskgmail.jaman.githubclient.view.profileslist.ProfilesListFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import org.kodein.di.Kodein
@@ -27,14 +27,14 @@ import org.kodein.di.generic.instance
 class MainActivity : BaseActivity(),
     AppNavigator,
     KodeinAware,
-    HeaderProfilesAdapter.ProfileSelectTarget {
+    ProfilesListAdapter.ProfileSelectTarget {
 
     override lateinit var kodein: Kodein
 
     private val appCache: AppCache by instance<AppCache>()
     private val showedUsersUpdateTarget = object : AppCacheParameterTarget {
         override fun updated() {
-            (main_menu_search_results.adapter as HeaderProfilesAdapter).updateProfiles(
+            (main_menu_search_results.adapter as ProfilesListAdapter).updateProfiles(
                 appCache.showedUsers()
             )
         }
@@ -94,7 +94,7 @@ class MainActivity : BaseActivity(),
         main_menu_header_version.text = BuildConfig.VERSION_NAME
         main_menu_search_results.messageView = main_menu_search_results_error
         main_menu_search_results.layoutManager = LinearLayoutManager(this)
-        main_menu_search_results.adapter = HeaderProfilesAdapter(
+        main_menu_search_results.adapter = ProfilesListAdapter(
             appCache.showedUsers(),
             this
         )

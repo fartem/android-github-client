@@ -19,58 +19,11 @@ class RepositoriesListAdapter(
     private val languages: JsonObject
 ) : ExpandableRecyclerViewAdapter<GitHubRepository>() {
 
-    companion object {
-
-        private const val viewTypeItem = 0
-        private const val viewTypeLoading = 1
-
-    }
-
     private val repositories = mutableListOf<GitHubRepository>()
-
-    private var loaderIsVisible = false
 
     init {
         repositories.addAll(
             initRepositories
-        )
-    }
-
-    override fun addMore(
-        items: List<GitHubRepository>
-    ) {
-        val lastIndex = itemCount
-        repositories.addAll(items)
-        notifyItemRangeInserted(
-            lastIndex,
-            items.size
-        )
-    }
-
-    fun loadingStarted() {
-        loaderIsVisible = true
-        repositories.add(
-            GitHubRepository(
-                "",
-                "",
-                "",
-                -1,
-                -1
-            )
-        )
-        notifyItemInserted(
-            itemCount - 1
-        )
-    }
-
-    fun loadingEnded() {
-        loaderIsVisible = false
-        val progressItemIndex = itemCount - 1
-        notifyItemRemoved(
-            progressItemIndex
-        )
-        repositories.removeAt(
-            progressItemIndex
         )
     }
 
@@ -97,29 +50,18 @@ class RepositoriesListAdapter(
         }
     }
 
-    override fun onBindViewHolder(
-        holder: ExpandableRecyclerViewHolder<GitHubRepository>,
-        position: Int
-    ) {
-        holder.bind(repositories[position])
+    override fun items(): MutableList<GitHubRepository> {
+        return repositories
     }
 
-    override fun getItemViewType(
-        position: Int
-    ): Int {
-        return if (loaderIsVisible) {
-            if (position == itemCount - 1) {
-                viewTypeLoading
-            } else {
-                viewTypeItem
-            }
-        } else {
-            viewTypeItem
-        }
-    }
-
-    override fun getItemCount(): Int {
-        return repositories.size
+    override fun loaderItem(): GitHubRepository {
+        return GitHubRepository(
+            "",
+            "",
+            "",
+            -1,
+            -1
+        )
     }
 
     inner class RepositoryHolder(

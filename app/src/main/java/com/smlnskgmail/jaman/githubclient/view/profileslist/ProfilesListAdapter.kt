@@ -21,60 +21,37 @@ class ProfilesListAdapter(
 
     companion object {
 
-        private const val viewTypeItem = 0
-        private const val viewTypeLoading = 1
-
         private const val optimalImageSize = 150
 
     }
 
-    private val shortProfiles = mutableListOf<GitHubShortProfile>()
-
-    private var loaderIsVisible = false
+    private val profiles = mutableListOf<GitHubShortProfile>()
 
     init {
-        this.shortProfiles.addAll(
+        this.profiles.addAll(
             initShortProfiles
         )
     }
 
-    override fun addMore(
-        items: List<GitHubShortProfile>
+    fun updateProfiles(
+        profiles: List<GitHubShortProfile>
     ) {
-        val lastIndex = itemCount
-        shortProfiles.addAll(items)
-        notifyItemRangeInserted(
-            lastIndex,
-            items.size
-        )
+        items().clear()
+        items().addAll(profiles)
+        notifyDataSetChanged()
     }
 
-    fun loadingStarted() {
-        loaderIsVisible = true
-        shortProfiles.add(
-            GitHubShortProfile(
-                -1,
-                "",
-                "",
-                null
-            )
-        )
-        notifyItemInserted(
-            itemCount - 1
-        )
+    override fun items(): MutableList<GitHubShortProfile> {
+        return profiles
     }
 
-    fun loadingEnded() {
-        if (itemCount != 0) {
-            loaderIsVisible = false
-            val progressItemIndex = itemCount - 1
-            notifyItemRemoved(
-                progressItemIndex
-            )
-            shortProfiles.removeAt(
-                progressItemIndex
-            )
-        }
+    override fun loaderItem(): GitHubShortProfile {
+        return GitHubShortProfile(
+            -1,
+            "",
+            "",
+            null
+        )
     }
 
     override fun onCreateViewHolder(
@@ -90,43 +67,24 @@ class ProfilesListAdapter(
                 )
             )
         } else {
-            ProfileHolder(
+            ShortProfileHolder(
                 LayoutInflater.from(parent.context).inflate(
                     R.layout.item_profile,
                     parent,
                     false
-                )
+                ),
+                profileSelectTarget
             )
         }
     }
 
-    override fun onBindViewHolder(
-        holder: ExpandableRecyclerViewHolder<GitHubShortProfile>,
-        position: Int
-    ) {
-        holder.bind(shortProfiles[position])
-    }
-
-    override fun getItemViewType(
-        position: Int
-    ): Int {
-        return if (loaderIsVisible) {
-            if (position == itemCount - 1) {
-                viewTypeLoading
-            } else {
-                viewTypeItem
-            }
-        } else {
-            viewTypeItem
-        }
-    }
-
     override fun getItemCount(): Int {
-        return shortProfiles.size
+        return profiles.size
     }
 
-    open inner class ProfileHolder(
-        itemView: View
+    inner class ShortProfileHolder(
+        itemView: View,
+        private val profileSelectTarget: ProfileSelectTarget
     ) : ExpandableRecyclerViewHolder<GitHubShortProfile>(itemView) {
 
         @SuppressLint("CheckResult")
