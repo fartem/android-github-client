@@ -12,11 +12,19 @@ About
 
 Demo app for exploring GitHub accounts and browse users repositories.
 
-Downloads
+Download
 -------------
+
+<img src="media/qrcodes/github_download.png" height="150px" />
 
 Screenshots
 -------------
+
+<p align="center">
+  <img src="media/screenshots/screenshot_01.png" width="200" />
+  <img src="media/screenshots/screenshot_02.png" width="200" />
+  <img src="media/screenshots/screenshot_03.png" width="200" />
+</p>
 
 How to contribute
 -------------
