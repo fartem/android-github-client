@@ -12,6 +12,11 @@ About
 
 Demo app for exploring GitHub accounts and browse users repositories.
 
+Languages colors
+-------------
+
+Provided by [github-colors](https://github.com/fartem/github-colors).
+
 Download
 -------------
 
