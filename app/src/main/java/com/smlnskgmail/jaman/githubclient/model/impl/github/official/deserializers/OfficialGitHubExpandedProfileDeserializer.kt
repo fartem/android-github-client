@@ -16,7 +16,6 @@ class OfficialGitHubExpandedProfileDeserializer : JsonDeserializer<OfficialGitHu
         context: JsonDeserializationContext?
     ): OfficialGitHubExpandedProfileResponse {
         json as JsonObject
-
         val name = json.get("name")
         val email = json.get("email")
         val company = json.get("company")

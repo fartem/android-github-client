@@ -9,17 +9,15 @@ import com.smlnskgmail.jaman.githubclient.model.impl.github.official.retrofit.Of
 import com.smlnskgmail.jaman.githubclient.model.impl.github.official.retrofit.responcses.OfficialGitHubExpandedProfileResponse
 import com.smlnskgmail.jaman.githubclient.model.impl.github.official.retrofit.responcses.OfficialGitHubRepositoriesResponse
 import com.smlnskgmail.jaman.githubclient.model.impl.github.official.retrofit.responcses.OfficialGitHubShortProfilesResponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class OfficialGitHubApi :
-    GitHubProfilesApi {
+class OfficialGitHubApi : GitHubProfilesApi {
 
     private var retrofit: Retrofit
-
     private var officialGitHubApiService: OfficialGitHubApiService
 
     private val gson = GsonBuilder()
@@ -43,6 +41,9 @@ class OfficialGitHubApi :
     init {
         retrofit = Retrofit.Builder()
             .baseUrl("https://api.github.com")
+            .addCallAdapterFactory(
+                RxJava3CallAdapterFactory.create()
+            )
             .addConverterFactory(
                 GsonConverterFactory.create(
                     gson
@@ -61,61 +62,26 @@ class OfficialGitHubApi :
         if (page == 1) {
             lastId = 0
         }
-        officialGitHubApiService.profilesPortion(
-            lastId
-        ).enqueue(object : Callback<OfficialGitHubShortProfilesResponse> {
-            override fun onFailure(
-                call: Call<OfficialGitHubShortProfilesResponse>,
-                t: Throwable
-            ) {
-                profilesLoadCallback.loadSuccess(
-                    emptyList()
-                )
-            }
-
-            override fun onResponse(
-                call: Call<OfficialGitHubShortProfilesResponse>,
-                response: Response<OfficialGitHubShortProfilesResponse>
-            ) {
-                if (response.body() != null) {
-                    lastId = response.body()!!.shortProfiles.last().id
-                    profilesLoadCallback.loadSuccess(
-                        response.body()!!.shortProfiles
-                    )
-                } else {
-                    profilesLoadCallback.loadError()
-                }
-            }
-        })
+        officialGitHubApiService.profilesPortion(lastId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { profilesLoadCallback.loadSuccess(it.shortProfiles) },
+                { profilesLoadCallback.loadError() },
+            )
     }
 
     override fun expandedProfileFor(
         login: String,
         expandedProfileLoadCallback: GitHubProfilesApi.ProfileLoadCallback
     ) {
-        officialGitHubApiService.profile(
-            login
-        ).enqueue(object : Callback<OfficialGitHubExpandedProfileResponse> {
-            override fun onFailure(
-                call: Call<OfficialGitHubExpandedProfileResponse>,
-                t: Throwable
-            ) {
-                expandedProfileLoadCallback.loadError()
-            }
-
-            override fun onResponse(
-                call: Call<OfficialGitHubExpandedProfileResponse>,
-                response: Response<OfficialGitHubExpandedProfileResponse>
-            ) {
-                if (response.body() != null) {
-                    expandedProfileLoadCallback.loadSuccess(
-                        response.body()!!.expandedProfile
-                    )
-                } else {
-                    expandedProfileLoadCallback.loadError()
-                }
-            }
-        })
+        officialGitHubApiService.profile(login)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { expandedProfileLoadCallback.loadSuccess(it.expandedProfile) },
+                { expandedProfileLoadCallback.loadError() },
+            )
     }
 
     override fun repositoriesFor(
@@ -123,30 +89,13 @@ class OfficialGitHubApi :
         page: Int,
         repositoriesLoadCallback: GitHubProfilesApi.RepositoriesLoadCallback
     ) {
-        officialGitHubApiService.repositories(
-            login,
-            page
-        ).enqueue(object : Callback<OfficialGitHubRepositoriesResponse> {
-            override fun onFailure(
-                call: Call<OfficialGitHubRepositoriesResponse>,
-                t: Throwable
-            ) {
-                repositoriesLoadCallback.loadError()
-            }
-
-            override fun onResponse(
-                call: Call<OfficialGitHubRepositoriesResponse>,
-                response: Response<OfficialGitHubRepositoriesResponse>
-            ) {
-                if (response.body() != null) {
-                    repositoriesLoadCallback.loadSuccess(
-                        response.body()!!.repositories
-                    )
-                } else {
-                    repositoriesLoadCallback.loadError()
-                }
-            }
-        })
+        officialGitHubApiService.repositories(login, page)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { repositoriesLoadCallback.loadSuccess(it.repositories) },
+                { repositoriesLoadCallback.loadError() },
+            )
     }
 
 }

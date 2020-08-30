@@ -15,7 +15,6 @@ class OfficialGitHubRepositoriesDeserializer : JsonDeserializer<OfficialGitHubRe
         val repositories = mutableListOf<GitHubRepository>()
         (json as JsonArray).forEach {
             it as JsonObject
-
             val name = it.get("name").asString
             val description = it.get("description")
             val language = it.get("language")
