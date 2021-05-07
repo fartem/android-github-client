@@ -24,9 +24,7 @@ class App : Application(), KodeinAware {
             }
         }
         bind<AppCache>() with singleton {
-            HawkAppCache(
-                this@App
-            )
+            HawkAppCache(this@App)
         }
     }
 

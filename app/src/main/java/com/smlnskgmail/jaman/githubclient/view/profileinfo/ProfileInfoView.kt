@@ -5,16 +5,11 @@ import com.smlnskgmail.jaman.githubclient.model.api.github.profiles.GitHubExpand
 
 interface ProfileInfoView {
 
-    fun showProfile(
-        expandedProfile: GitHubExpandedProfile
-    )
+    fun showProfile(expandedProfile: GitHubExpandedProfile)
 
-    fun showRepositories(
-        gitHubRepositories: List<GitHubRepository>
-    )
-    fun addToRepositoriesList(
-        gitHubRepositories: List<GitHubRepository>
-    )
+    fun showRepositories(gitHubRepositories: List<GitHubRepository>)
+
+    fun addToRepositoriesList(gitHubRepositories: List<GitHubRepository>)
 
     fun showLoadError()
 

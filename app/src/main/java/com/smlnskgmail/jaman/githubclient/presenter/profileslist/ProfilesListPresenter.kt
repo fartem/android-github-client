@@ -14,11 +14,9 @@ interface ProfilesListPresenter {
     fun reloadProfiles()
     fun loadMoreProfiles()
 
-    fun profilesLoading(): Boolean
+    fun isProfilesIsLoading(): Boolean
     fun isLastPage(): Boolean
 
-    fun profileSelect(
-        gitHubProfile: GitHubShortProfile
-    )
+    fun profileSelect(gitHubProfile: GitHubShortProfile)
 
 }

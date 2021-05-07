@@ -23,27 +23,24 @@ interface GitHubProfilesApi {
 
     interface ProfilesLoadCallback {
 
-        fun loadSuccess(
-            shortProfiles: List<GitHubShortProfile>
-        )
+        fun loadSuccess(shortProfiles: List<GitHubShortProfile>)
+
         fun loadError()
 
     }
 
     interface ProfileLoadCallback {
 
-        fun loadSuccess(
-            expandedProfile: GitHubExpandedProfile
-        )
+        fun loadSuccess(expandedProfile: GitHubExpandedProfile)
+
         fun loadError()
 
     }
 
     interface RepositoriesLoadCallback {
 
-        fun loadSuccess(
-            repositories: List<GitHubRepository>
-        )
+        fun loadSuccess(repositories: List<GitHubRepository>)
+
         fun loadError()
 
     }

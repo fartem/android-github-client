@@ -38,7 +38,7 @@ class ProfileInfoFragment : BaseFragment(), ProfileInfoView, KodeinAware {
         (context?.applicationContext as App).kodein
     }
 
-    private val gitHubProfilesApi: GitHubProfilesApi by instance<GitHubProfilesApi>()
+    private val gitHubProfilesApi: GitHubProfilesApi by instance()
 
     private lateinit var profileInfoPresenter: ProfileInfoPresenter
 
@@ -52,7 +52,7 @@ class ProfileInfoFragment : BaseFragment(), ProfileInfoView, KodeinAware {
             this,
             requireArguments().getString(
                 profileIdKey,
-            null
+                null
             )
         )
     }
@@ -126,21 +126,15 @@ class ProfileInfoFragment : BaseFragment(), ProfileInfoView, KodeinAware {
             val layoutManager = LinearLayoutManager(context)
             repositories_list.layoutManager = layoutManager
             repositories_list.addOnScrollListener(
-                object : ExpandableRecyclerViewPagination(
-                    layoutManager
-                ) {
+                object : ExpandableRecyclerViewPagination(layoutManager) {
                     override fun loadMoreItems() {
                         adapter.loadingStarted()
                         profileInfoPresenter.loadMoreRepositories()
                     }
 
-                    override fun isLastPage(): Boolean {
-                        return profileInfoPresenter.isLastPage()
-                    }
+                    override fun isLastPage() = profileInfoPresenter.isLastPage()
 
-                    override fun isLoading(): Boolean {
-                        return profileInfoPresenter.repositoriesLoading()
-                    }
+                    override fun isLoading() = profileInfoPresenter.isRepositoriesIsLoading()
                 }
             )
         }
@@ -167,16 +161,10 @@ class ProfileInfoFragment : BaseFragment(), ProfileInfoView, KodeinAware {
         ).show()
     }
 
-    override fun title(): String {
-        return getString(R.string.title_profile_info)
-    }
+    override fun title() = getString(R.string.title_profile_info)
 
-    override fun enableBackPress(): Boolean {
-        return true
-    }
+    override fun enableBackPress() = true
 
-    override fun layoutResId(): Int {
-        return R.layout.fragment_profile_info
-    }
+    override fun layoutResId() = R.layout.fragment_profile_info
 
 }

@@ -24,9 +24,7 @@ class OfficialGitHubShortProfilesDeserializer : JsonDeserializer<OfficialGitHubS
                 )
             )
         }
-        return OfficialGitHubShortProfilesResponse(
-            profiles
-        )
+        return OfficialGitHubShortProfilesResponse(profiles)
     }
 
 }

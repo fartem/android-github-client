@@ -8,9 +8,10 @@ detekt {
         new URL(
                 'https://raw.githubusercontent.com/fartem/repository-rules/master/rules/kotlin/detekt/detekt.yml'
         ).withInputStream {
-            i -> detektConfig.withOutputStream {
-                it << i
-            }
+            i ->
+                detektConfig.withOutputStream {
+                    it << i
+                }
         }
     }
 

@@ -31,7 +31,7 @@ class MainActivity : BaseActivity(),
 
     override lateinit var kodein: Kodein
 
-    private val appCache: AppCache by instance<AppCache>()
+    private val appCache: AppCache by instance()
     private val showedUsersUpdateTarget = object : AppCacheParameterTarget {
         override fun updated() {
             (main_menu_search_results.adapter as ProfilesListAdapter).updateProfiles(
