@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/AppRecyclerViewItem"
     android:orientation="vertical">
 
@@ -23,21 +24,21 @@
         <TextView
             android:id="@+id/repository_language"
             style="@style/AppRepositoryInfoTextViewWithIcon"
-            android:drawableStart="@drawable/ic_dot"
+            app:drawableStartCompat="@drawable/ic_dot"
             tools:text="Kotlin" />
 
         <TextView
             android:id="@+id/repository_stars"
             style="@style/AppRepositoryInfoTextViewWithIcon"
             android:layout_marginStart="@dimen/common_margin_half"
-            android:drawableStart="@drawable/ic_star"
+            app:drawableStartCompat="@drawable/ic_star"
             tools:text="\?" />
 
         <TextView
             android:id="@+id/repository_forks"
             style="@style/AppRepositoryInfoTextViewWithIcon"
             android:layout_marginStart="@dimen/common_margin_half"
-            android:drawableStart="@drawable/ic_fork"
+            app:drawableStartCompat="@drawable/ic_fork"
             tools:text="\?" />
 
     </LinearLayout>
