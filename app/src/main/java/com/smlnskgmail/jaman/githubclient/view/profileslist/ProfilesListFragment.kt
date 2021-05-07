@@ -45,7 +45,6 @@ class ProfilesListFragment : BaseFragment(),
             this
         )
         profiles_list.messageView = profiles_list_message_view
-
         profiles_list_refresh.isEnabled = false
     }
 
@@ -67,7 +66,7 @@ class ProfilesListFragment : BaseFragment(),
                 }
 
                 override fun isLastPage(): Boolean {
-                    return profilesListPresenter.profilesLoading()
+                    return profilesListPresenter.isProfilesIsLoading()
                 }
 
                 override fun isLoading(): Boolean {
@@ -99,9 +98,7 @@ class ProfilesListFragment : BaseFragment(),
         shortProfiles: List<GitHubShortProfile>
     ) {
         (profiles_list.adapter as ProfilesListAdapter).loadingEnded()
-        (profiles_list.adapter as ProfilesListAdapter).addMore(
-            shortProfiles
-        )
+        (profiles_list.adapter as ProfilesListAdapter).addMore(shortProfiles)
     }
 
     override fun showLoadError() {
@@ -122,29 +119,19 @@ class ProfilesListFragment : BaseFragment(),
         enableRefresh()
     }
 
-    override fun showProfileInfo(
-        gitHubProfile: GitHubShortProfile
-    ) {
+    override fun showProfileInfo(gitHubProfile: GitHubShortProfile) {
         (activity as AppNavigator).showProfileInfoFor(
             gitHubProfile
         )
     }
 
-    override fun title(): String {
-        return getString(R.string.title_profiles_list)
-    }
+    override fun title() = getString(R.string.title_profiles_list)
 
-    override fun enableBackPress(): Boolean {
-        return false
-    }
+    override fun enableBackPress() = false
 
-    override fun layoutResId(): Int {
-        return R.layout.fragment_profiles_list
-    }
+    override fun layoutResId() = R.layout.fragment_profiles_list
 
-    override fun profileSelected(
-        gitHubProfile: GitHubShortProfile
-    ) {
+    override fun profileSelected(gitHubProfile: GitHubShortProfile) {
         profilesListPresenter.profileSelect(
             gitHubProfile
         )

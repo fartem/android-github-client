@@ -13,7 +13,7 @@ interface ProfileInfoPresenter {
 
     fun loadMoreRepositories()
 
-    fun repositoriesLoading(): Boolean
+    fun isRepositoriesIsLoading(): Boolean
     fun isLastPage(): Boolean
 
 }

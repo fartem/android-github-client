@@ -7,6 +7,7 @@ interface ProfilesListView {
     fun showProfilesList(
         shortProfiles: List<GitHubShortProfile>
     )
+
     fun addToProfilesList(
         shortProfiles: List<GitHubShortProfile>
     )

@@ -66,7 +66,7 @@ class RepositoriesListAdapter(
 
     inner class RepositoryHolder(
         itemView: View
-    ): ExpandableRecyclerViewHolder<GitHubRepository>(itemView) {
+    ) : ExpandableRecyclerViewHolder<GitHubRepository>(itemView) {
 
         override fun bind(item: GitHubRepository) {
             itemView.repository_name.text = item.name
@@ -89,9 +89,7 @@ class RepositoriesListAdapter(
                 }
                 itemView.repository_language.compoundDrawablesRelative.forEach {
                     it?.colorFilter = PorterDuffColorFilter(
-                        Color.parseColor(
-                            languageColor
-                        ),
+                        Color.parseColor(languageColor),
                         PorterDuff.Mode.SRC_ATOP
                     )
                 }

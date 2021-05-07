@@ -14,7 +14,7 @@ class ProfileInfoPresenterImpl : ProfileInfoPresenter {
 
     private var repositoriesPage: Int = 0
 
-    private var repositoriesLoading = false
+    private var isRepositoriesIsLoading = false
     private var isLastPage = false
 
     override fun init(
@@ -71,12 +71,8 @@ class ProfileInfoPresenterImpl : ProfileInfoPresenter {
         )
     }
 
-    override fun repositoriesLoading(): Boolean {
-        return repositoriesLoading
-    }
+    override fun isRepositoriesIsLoading() = isRepositoriesIsLoading
 
-    override fun isLastPage(): Boolean {
-        return isLastPage
-    }
+    override fun isLastPage() = isLastPage
 
 }

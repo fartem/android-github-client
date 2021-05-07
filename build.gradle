@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.4.0'
+    ext.kotlin_version = '1.4.32'
     repositories {
         google()
         jcenter()
@@ -8,9 +8,9 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.1'
+        classpath 'com.android.tools.build:gradle:4.2.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'de.aaschmid:gradle-cpd-plugin:3.1'
+        classpath 'de.aaschmid:gradle-cpd-plugin:3.2'
         classpath 'com.hiya:jacoco-android:0.2'
     }
 }
@@ -23,9 +23,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven {
-            url 'https://dl.bintray.com/fartem/android'
-        }
+        maven { url "https://jitpack.io" }
     }
 }
 

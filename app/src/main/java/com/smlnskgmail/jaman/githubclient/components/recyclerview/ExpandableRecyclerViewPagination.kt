@@ -15,10 +15,10 @@ abstract class ExpandableRecyclerViewPagination(
         val visibleItemsCount = layoutManager.childCount
         val totalItemsCount = layoutManager.itemCount
         val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
-
         if (!isLoading() && !isLastPage()) {
             if (visibleItemsCount + firstVisibleItemPosition >= totalItemsCount
-                && firstVisibleItemPosition >= 0) {
+                && firstVisibleItemPosition >= 0
+            ) {
                 loadMoreItems()
             }
         }

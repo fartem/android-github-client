@@ -33,17 +33,13 @@ class ProfilesListAdapter(
         )
     }
 
-    fun updateProfiles(
-        profiles: List<GitHubShortProfile>
-    ) {
+    fun updateProfiles(profiles: List<GitHubShortProfile>) {
         items().clear()
         items().addAll(profiles)
         notifyDataSetChanged()
     }
 
-    override fun items(): MutableList<GitHubShortProfile> {
-        return profiles
-    }
+    override fun items() = profiles
 
     override fun loaderItem(): GitHubShortProfile {
         return GitHubShortProfile(
@@ -110,9 +106,7 @@ class ProfilesListAdapter(
                 )
             }
             itemView.setOnClickListener {
-                profileSelectTarget.profileSelected(
-                    item
-                )
+                profileSelectTarget.profileSelected(item)
             }
         }
 

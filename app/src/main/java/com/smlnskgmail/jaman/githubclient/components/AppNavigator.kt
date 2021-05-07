@@ -4,8 +4,6 @@ import com.smlnskgmail.jaman.githubclient.model.api.github.profiles.GitHubShortP
 
 interface AppNavigator {
 
-    fun showProfileInfoFor(
-        gitHubProfile: GitHubShortProfile
-    )
+    fun showProfileInfoFor(gitHubProfile: GitHubShortProfile)
 
 }

@@ -10,17 +10,12 @@ interface AppCache {
 
     }
 
-    fun saveShowedUser(
-        gitHubShortProfile: GitHubShortProfile
-    )
+    fun saveShowedUser(gitHubShortProfile: GitHubShortProfile)
 
     fun showedUsers(): List<GitHubShortProfile>
 
-    fun addShowedUsersUpdateTarget(
-        appCacheParameterTarget: AppCacheParameterTarget
-    )
-    fun removeShowedUsersUpdateTarget(
-        appCacheParameterTarget: AppCacheParameterTarget
-    )
+    fun addShowedUsersUpdateTarget(appCacheParameterTarget: AppCacheParameterTarget)
+
+    fun removeShowedUsersUpdateTarget(appCacheParameterTarget: AppCacheParameterTarget)
 
 }

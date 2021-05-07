@@ -30,53 +30,41 @@ class HawkAppCache(
         if (Hawk.contains(firstProfileIdKey)) {
             Hawk.get<String>(firstProfileIdKey).let {
                 showedProfiles.add(
-                    GitHubShortProfileParser(
-                        it
-                    ).fromJsonString()
+                    GitHubShortProfileParser(it).fromJsonString()
                 )
             }
         }
         if (Hawk.contains(secondProfileIdKey)) {
             Hawk.get<String>(secondProfileIdKey).let {
                 showedProfiles.add(
-                    GitHubShortProfileParser(
-                        it
-                    ).fromJsonString()
+                    GitHubShortProfileParser(it).fromJsonString()
                 )
             }
         }
         if (Hawk.contains(thirdProfileIdKey)) {
             Hawk.get<String>(thirdProfileIdKey).let {
                 showedProfiles.add(
-                    GitHubShortProfileParser(
-                        it
-                    ).fromJsonString()
+                    GitHubShortProfileParser(it).fromJsonString()
                 )
             }
         }
         if (Hawk.contains(fourthProfileIdKey)) {
             Hawk.get<String>(fourthProfileIdKey).let {
                 showedProfiles.add(
-                    GitHubShortProfileParser(
-                        it
-                    ).fromJsonString()
+                    GitHubShortProfileParser(it).fromJsonString()
                 )
             }
         }
         if (Hawk.contains(fifthProfileIdKey)) {
             Hawk.get<String>(fifthProfileIdKey).let {
                 showedProfiles.add(
-                    GitHubShortProfileParser(
-                        it
-                    ).fromJsonString()
+                    GitHubShortProfileParser(it).fromJsonString()
                 )
             }
         }
     }
 
-    override fun saveShowedUser(
-        gitHubShortProfile: GitHubShortProfile
-    ) {
+    override fun saveShowedUser(gitHubShortProfile: GitHubShortProfile) {
         if (showedProfiles.contains(gitHubShortProfile)) {
             val profileIndex = showedProfiles.indexOf(
                 gitHubShortProfile
@@ -95,14 +83,10 @@ class HawkAppCache(
                 ).toJsonString()
             )
         }
-        showedProfiles.add(
-            gitHubShortProfile
-        )
+        showedProfiles.add(gitHubShortProfile)
         Hawk.put(
             showedProfiles.size.minus(1).toString(),
-            GitHubShortProfileWrapper(
-                gitHubShortProfile
-            ).toJsonString()
+            GitHubShortProfileWrapper(gitHubShortProfile).toJsonString()
         )
         showedProfilesTargets.forEach {
             it.updated()
@@ -116,17 +100,13 @@ class HawkAppCache(
     override fun addShowedUsersUpdateTarget(
         appCacheParameterTarget: AppCacheParameterTarget
     ) {
-        showedProfilesTargets.add(
-            appCacheParameterTarget
-        )
+        showedProfilesTargets.add(appCacheParameterTarget)
     }
 
     override fun removeShowedUsersUpdateTarget(
         appCacheParameterTarget: AppCacheParameterTarget
     ) {
-        showedProfilesTargets.remove(
-            appCacheParameterTarget
-        )
+        showedProfilesTargets.remove(appCacheParameterTarget)
     }
 
 }

@@ -26,12 +26,8 @@ abstract class ExpandableRecyclerViewAdapter<T>
     fun loadingStarted() {
         if (itemCount != 0) {
             loaderIsVisible = true
-            items().add(
-                loaderItem()
-            )
-            notifyItemInserted(
-                itemCount - 1
-            )
+            items().add(loaderItem())
+            notifyItemInserted(itemCount - 1)
         }
     }
 
@@ -42,12 +38,8 @@ abstract class ExpandableRecyclerViewAdapter<T>
     fun loadingEnded() {
         loaderIsVisible = false
         val progressItemIndex = itemCount - 1
-        notifyItemRemoved(
-            progressItemIndex
-        )
-        items().removeAt(
-            progressItemIndex
-        )
+        notifyItemRemoved(progressItemIndex)
+        items().removeAt(progressItemIndex)
     }
 
     override fun onBindViewHolder(
@@ -71,8 +63,6 @@ abstract class ExpandableRecyclerViewAdapter<T>
         }
     }
 
-    override fun getItemCount(): Int {
-        return items().size
-    }
+    override fun getItemCount() = items().size
 
 }

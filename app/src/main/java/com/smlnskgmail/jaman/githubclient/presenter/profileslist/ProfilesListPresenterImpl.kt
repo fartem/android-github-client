@@ -11,7 +11,7 @@ class ProfilesListPresenterImpl : ProfilesListPresenter {
 
     private var page: Int = 0
 
-    private var profilesLoading = false
+    private var isProfilesIsLoading = false
     private var isLastPage = false
 
     override fun init(
@@ -30,50 +30,36 @@ class ProfilesListPresenterImpl : ProfilesListPresenter {
     }
 
     override fun loadMoreProfiles() {
-        profilesLoading = true
+        isProfilesIsLoading = true
         gitHubProfilesApi.profilesPortion(
             ++page,
             object : GitHubProfilesApi.ProfilesLoadCallback {
-                override fun loadSuccess(
-                    shortProfiles: List<GitHubShortProfile>
-                ) {
+                override fun loadSuccess(shortProfiles: List<GitHubShortProfile>) {
                     if (page == 1) {
-                        profilesListView.showProfilesList(
-                            shortProfiles
-                        )
+                        profilesListView.showProfilesList(shortProfiles)
                     } else {
-                        profilesListView.addToProfilesList(
-                            shortProfiles
-                        )
+                        profilesListView.addToProfilesList(shortProfiles)
                     }
-                    profilesLoading = false
+                    isProfilesIsLoading = false
                 }
 
                 override fun loadError() {
                     isLastPage = true
-                    profilesLoading = false
+                    isProfilesIsLoading = false
 
                     profilesListView.showLoadError()
-                    profilesLoading = false
+                    isProfilesIsLoading = false
                 }
             }
         )
     }
 
-    override fun profilesLoading(): Boolean {
-        return profilesLoading
-    }
+    override fun isProfilesIsLoading() = isProfilesIsLoading
 
-    override fun isLastPage(): Boolean {
-        return isLastPage
-    }
+    override fun isLastPage() = isLastPage
 
-    override fun profileSelect(
-        gitHubProfile: GitHubShortProfile
-    ) {
-        profilesListView.showProfileInfo(
-            gitHubProfile
-        )
+    override fun profileSelect(gitHubProfile: GitHubShortProfile) {
+        profilesListView.showProfileInfo(gitHubProfile)
     }
 
 }
